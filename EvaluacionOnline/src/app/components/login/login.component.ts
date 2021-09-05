@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
     nickName: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
     ]),
     password: new FormControl('', Validators.required),
   });
@@ -28,17 +27,15 @@ export class LoginComponent implements OnInit {
   }
 
   Login(nickName: string, password: string) {
-    this.usuario = this.userService.BuscarUsuarioEnLista(nickName, password);
+    this.usuario = this.userService.BuscarUsuarioEnListaPorLogin(nickName, password);
 
     if (!this.loginForm.invalid){ 
       if (this.usuario != null) {
-        this.router.navigate(['alumnos']);
+        this.router.navigate(['home', this.usuario.id]);
       } else {
         console.log('err')
       }
     }
-
   }
 
-  
 }

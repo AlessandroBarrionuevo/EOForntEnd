@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+.barra{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #80d0c7;
+    padding: 1rem;
+}
+
+.titulo-navbar{
+    text-transform: uppercase;
+}
+
+.link-navbar{
+    text-decoration: none;
+    color: white;
+}
+
+.link-navbar:hover{
+    font-weight: 900;
+    color: black;
+}

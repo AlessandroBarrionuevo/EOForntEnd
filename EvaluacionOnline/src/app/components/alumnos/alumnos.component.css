@@ -1,0 +1,12 @@
+.body-table{
+    width: 100%;
+    height: 100%;
+}
+
+.table{
+    text-transform: capitalize;
+}
+
+a{
+    text-decoration: none;
+}

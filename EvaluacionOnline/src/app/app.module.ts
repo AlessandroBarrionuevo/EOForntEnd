@@ -8,13 +8,19 @@ import { AlumnosComponent } from './components/alumnos/alumnos.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlumnoDetailComponent } from './components/alumno-detail/alumno-detail.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FormUpdateComponent } from './components/admin/form-update/form-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlumnosComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AlumnoDetailComponent,
+    NavbarComponent,
+    FormUpdateComponent
   ],
   imports: [
     BrowserModule,

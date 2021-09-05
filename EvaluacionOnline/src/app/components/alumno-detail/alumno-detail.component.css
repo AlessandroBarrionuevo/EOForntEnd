@@ -1,0 +1,19 @@
+.contenedor-card{
+    margin: 0 auto;
+    margin-top: 3rem;
+    border: #02b1c8 solid;
+    margin-bottom: 3rem;
+    border-radius: 2rem 0 ;
+}
+
+.card-body{
+    background-color: white;
+    color: #02b1c8;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 3rem;
+}
+
+.table{
+    text-transform: uppercase;
+}

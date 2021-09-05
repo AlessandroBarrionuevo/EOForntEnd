@@ -1,0 +1,59 @@
+<div class="col-6 container">
+    <div class="border-login">
+      <div>
+        <h2 class="titulo-login">Modificar alumno</h2>
+      </div>
+      <form
+        [formGroup]="alumnoForm"
+        (submit)="tomarDatosParaModificarAlumno()"
+        class="loginForm"
+      >
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="nombre"
+            formControlName="nombre"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="apellido"
+            formControlName="apellido"
+          />
+        </div>
+        <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="direccion"
+              formControlName="direccion"
+            />
+        </div>
+        <div class="form-group">
+        <input
+            type="email"
+            class="form-control"
+            placeholder="mail"
+            formControlName="mail"
+        />
+        </div>
+        <div class="form-group">
+            <input
+                type="tel"
+                class="form-control"
+                placeholder="telefono"
+                formControlName="telefono"
+            />
+        </div>
+
+        <div class="align-center">
+          <button class="btn btn-success" type="submit" (click)="tomarDatosParaModificarAlumno()">Actualizar</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+  

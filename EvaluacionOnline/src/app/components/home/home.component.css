@@ -1,0 +1,126 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+/*Globales*/
+html {
+    box-sizing: border-box;
+    min-height: 100%;
+    font-size: 62.5%;
+}
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  body{
+        font-family: 'Krub', sans-serif;
+        background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+        min-height: 100%;
+        font-size: 1.6rem;
+    }
+
+
+/*    hero   */
+
+.hero{
+    
+    /*Altura*/
+    height: 15rem;
+
+    background-image: url(../../../assets/img/5f93679360f8e_img-portada_20201023_17_30.jpg.opdownload);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /*Se pone al padre relative para dar lugar al hijo con el absolute*/
+    position: relative;
+
+    /*Ajusto el texto en el padre hero*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.hero::after{
+    
+    /*Para ponerlo transparente*/
+    content:'';
+    background-color: rgba(0, 0, 0, .7); /*.7 nos da la transparencia*/
+    
+    /*toma todo lo disponible, al padre hay que darle relative*/
+    position: absolute; 
+   
+    /*Posiciona la transparencia*/
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.cartelHero{
+    background-color: #80d0c7;
+    padding: 1rem 1rem;
+    color: white;
+    font-weight: 900;
+    text-align: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+
+.contenedor{
+    /* Ancho de la pantalla */
+    max-width: 90%;
+    margin: 0 auto;/*Centro el contenedor*/
+
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    /*Lo saco de https://www.cssmatic.com/box-shadow*/
+    -webkit-box-shadow: -1px 10px 28px 5px rgba(0,0,0,0.45);
+    -moz-box-shadow: -1px 10px 28px 5px rgba(0,0,0,0.45);
+    box-shadow: -1px 10px 28px 5px rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: space-between;
+}
+
+.contenedor-Imagen{
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.tituloImagen{
+    position: absolute;
+    top: 50%;
+   left: 25%;
+   color: white;
+   text-transform: uppercase;
+   font-weight: 700;
+}
+
+.linkImagen{
+    text-decoration: none;
+    margin-top: 1rem;
+    
+}
+
+.btnLink{
+    background-color: #80d0c7;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-weight: 700;
+}
+
+.imagenHome{
+    border-radius: 1rem;
+}
