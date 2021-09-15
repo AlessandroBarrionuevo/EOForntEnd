@@ -1,0 +1,90 @@
+<div  style="text-align: center;" class="barra">
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', 1]">Alumnos</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Profesores</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
+</div>
+
+<div class="col-6 container">
+  <div class="border-login">
+    <div>
+      <h2 class="titulo-login">Modificar alumno</h2>
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="idAlumnoAModificar"
+        readonly="true"
+      />
+    </div>
+    
+    <form
+      [formGroup]="alumnoForm"
+      (submit)="tomarDatosParaModificarAlumno(alumnoForm, idAlumnoAModificar)"
+      class="loginForm"
+    >
+      
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{alumno.nombre}}"
+          formControlName="nombre"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{alumno.apellido}}"
+          formControlName="apellido"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{alumno.direccion}}"
+          formControlName="direccion"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="{{alumno.mail}}"
+          formControlName="mail"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="tel"
+          class="form-control"
+          placeholder="{{alumno.telefono}}"
+          formControlName="telefono"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="tel"
+          class="form-control"
+          placeholder="{{alumno.dni}}"
+          readonly="true"
+        />
+      </div>
+
+      <div class="align-center">
+        <button
+          class="btn botonActualizar"
+          type="submit"
+          (click)="
+            tomarDatosParaModificarAlumno(alumnoForm, idAlumnoAModificar)
+          "
+        >
+          Actualizar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

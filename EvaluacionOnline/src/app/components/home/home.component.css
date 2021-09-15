@@ -124,3 +124,26 @@ html {
 .imagenHome{
     border-radius: 1rem;
 }
+
+.botonInfo{
+    background-color: #80d0c7;
+    border: none;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-weight: 700;
+}
+
+.navbarHome{
+    padding: 0.5rem;
+    background-color: #80d0c7;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btnlog{
+    color: white;
+    border: white 1px solid;
+}

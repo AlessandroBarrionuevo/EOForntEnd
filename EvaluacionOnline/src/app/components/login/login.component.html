@@ -1,11 +1,11 @@
-<div class="col-6 container">
+<!-- <div class="col-6 container" >
   <div class="border-login">
     <div>
       <h2 class="titulo-login">Bienvenido</h2>
     </div>
     <form
       [formGroup]="loginForm"
-      (submit)="Login(loginForm.value.nickName, loginForm.value.password)"
+      (submit)="loginWithRedirect()"
       class="loginForm"
     >
       <div class="form-group">
@@ -24,13 +24,14 @@
           formControlName="password"
         />
       </div>
-
-      <div class="div-forgot">
-        <!-- <a href="#" class="forgot">Olvidaste tu contrasenia?</a> -->
-      </div>
+      
       <div class="align-center">
         <button class="btn btn-success" type="submit">Login</button>
       </div>
     </form>
   </div>
+</div> -->
+
+<div class="align-center">
+  <button class="btn btn-success" (click)= "login()">Login</button>
 </div>

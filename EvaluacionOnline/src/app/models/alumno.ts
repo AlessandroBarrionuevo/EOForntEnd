@@ -16,4 +16,5 @@ export class Alumno implements Persona{
   idUsuario: number;
   matricula: number;
   listaCursos: Curso[];
+  id: number;
 }

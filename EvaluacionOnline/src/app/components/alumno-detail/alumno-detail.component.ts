@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class AlumnoDetailComponent implements OnInit {
   id: number;
-  alumno: Alumno;
+  alumno: any;
   usuarioId: number;
   usuario: Usuario;
 
@@ -22,7 +22,9 @@ export class AlumnoDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alumno = this.alumnosService.buscarAlumnoEnListaPorId(this.id);
+    this.alumno = this.alumnosService.obtenerAlumnoPorId(this.id).subscribe(
+      (r) => { this.alumno = r}
+    )
     this.usuario = this.usuarioService.BuscarUsuarioEnListaPorId(this.usuarioId);
   }
 

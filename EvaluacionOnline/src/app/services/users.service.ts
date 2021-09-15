@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -11,15 +12,15 @@ export class UsersService {
     ,{ id: 5, nickName: 'profeB', password: 'profeB', idRol: 2 }
   ]
   
-  constructor() { }
+  constructor(public autho: AuthService) { }
 
   listadoUsuarios(): Usuario[] {
     return this.listaUsuarios;
   }
 
-  BuscarUsuarioEnListaPorLogin(nickName: string, password: string): Usuario {
+  BuscarUsuarioEnListaPorLogin(nickName: string): Usuario {
     let usuarioEncontrado: Usuario;
-    usuarioEncontrado = this.listaUsuarios.find(x => x.nickName == nickName && x.password == password);
+    usuarioEncontrado = this.listaUsuarios.find(x => x.nickName == nickName);
 
     return usuarioEncontrado;
   }
@@ -31,4 +32,13 @@ export class UsersService {
     return usuarioEncontrado;
   }
 
+  obtenerDatosDeUsuario(): any {
+    let datos: string;
+
+    if (this.autho.isAuthenticated$) {
+      this.autho.user$.subscribe(
+      (profile) => (datos = JSON.stringify(profile, null))
+    );
+    }
+  }
 }

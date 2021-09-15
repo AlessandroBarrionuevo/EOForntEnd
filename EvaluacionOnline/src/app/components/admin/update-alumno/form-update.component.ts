@@ -12,12 +12,15 @@ import { AlumnosServiceService } from 'src/app/services/alumnos-service.service'
 export class FormUpdateComponent implements OnInit {
   usuarioId: number;
   idAlumnoAModificar: number;
+  alumno: any;
+
   alumnoForm: FormGroup = new FormGroup({
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
     direccion: new FormControl('', Validators.required),
     mail: new FormControl('', Validators.required),
-    telefono: new FormControl('', Validators.required)
+    telefono: new FormControl('', Validators.required),
+    dni: new FormControl('', Validators.required)
   });
 
   constructor(private alumnosService: AlumnosServiceService, private route: ActivatedRoute, private router: Router) {
@@ -26,21 +29,28 @@ export class FormUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.alumno = this.alumnosService.obtenerAlumnoPorId(this.idAlumnoAModificar).subscribe(
+      (r) => { this.alumno = r, console.log(r);
+       }
+    )
   }
 
-  tomarDatosParaModificarAlumno() {
-    let alumno = this.alumnosService.buscarAlumnoEnListaPorId(this.idAlumnoAModificar);
-    alumno.nombre = this.alumnoForm.value.nombre;
-    alumno.apellido = this.alumnoForm.value.apellido;
-    alumno.direccion = this.alumnoForm.value.direccion;
-    alumno.mail = this.alumnoForm.value.mail;
-    alumno.telefono = this.alumnoForm.value.telefono;
-
-    this.alumnosService.modificarAlumno(alumno);
-    console.log(alumno);
+  tomarDatosParaModificarAlumno(alumno: FormGroup, id: number) {
+    let alumnoAUpdatear = new Alumno(
+      alumno.value.nombre,
+      alumno.value.apellido ,
+      alumno.value.dni ,
+      alumno.value.mail ,
+      alumno.value.direccion,
+      alumno.value.telefono
+    )
+    alumnoAUpdatear.id = this.alumno.id
+    alumnoAUpdatear.dni = this.alumno.dni
     
-    this.router.navigate(['alumnos', this.usuarioId]);
-
+    this.alumnosService.modificarAlumnoHttp(alumnoAUpdatear).subscribe(
+      (r) => { console.log(r); }
+    )
+    
+    //this.router.navigate(['alumnos', this.usuarioId]);
   }
 }

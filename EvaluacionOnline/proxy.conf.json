@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://www.fotograficadigital.com.ar",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

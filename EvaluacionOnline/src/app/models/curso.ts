@@ -1,4 +1,4 @@
-import { AlumnosComponent } from "../components/alumnos/alumnos.component";
+import { AlumnosComponent } from "../components/admin/alumnos/alumnos.component";
 import { Alumno } from "./alumno";
 
 export interface Curso{

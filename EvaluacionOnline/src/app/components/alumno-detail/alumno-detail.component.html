@@ -1,17 +1,16 @@
 <div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 1">
-  <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/home', usuario.id]">Home</a></h5>
-  <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/alumnos', usuario.id]">Alumnos</a></h5>
-  <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/alumnos']">Profesores</a></h5>
-  <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/login']">Desloguearse</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', usuario.id]">Alumnos</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Profesores</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
 </div>
 
 <div class="card contenedor-card" style="width: 18rem;">
     <!-- <img class="card-img-top" src="{{objRecibido?.image}}" alt="Imagen personaje"> -->
     <div class="card-body ">
         <h5 class="card-title">{{alumno?.nombre}}</h5>
-        <p class="card-text">{{alumno?.idUsuario}}</p>
         <p class="card-text">{{alumno?.apellido}}</p>
-        <p class="card-text">{{alumno?.matricula}}</p>
+        <p class="card-text">{{alumno?.dni}}</p>
         
     </div>
     
@@ -34,4 +33,4 @@
         <td>{{curso.fechaFin}}</td>
       </tr>
     </tbody>
-</table>
+</table> 
