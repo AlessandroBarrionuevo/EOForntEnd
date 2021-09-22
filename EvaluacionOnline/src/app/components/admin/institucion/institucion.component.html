@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row barra" style="text-align: center;">
+
+        <div class="col-sm">
+            <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a>
+            </h5>
+        </div>
+
+        <div class="col-sm">
+            <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog"
+                    (click)="create()">Crear Institucion</a>
+            </h5>
+        </div>
+
+        <div class="col-sm">
+            <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" (click)="deleteSelected()"
+                    [class.disabled]="!_enableCRUDButtons">Eliminar seleccionadas</a>
+            </h5>
+        </div>
+
+        <div class="col-sm">
+            <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a>
+            </h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <span class="custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="_selectAll" (click)="selectAll()">
+                        </span>
+                    </th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">CUIT</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let currentInstitution of _map | keyvalue">
+                    <th scope="row">
+                        <span class="custom-checkbox">
+                            <input type="checkbox" id="checkbox1" [(ngModel)]="currentInstitution.value"
+                                (click)="select(currentInstitution.key, currentInstitution.value)">
+                        </span>
+                    </th>
+                    <td>{{ currentInstitution.key.nombre}}</td>
+                    <td>{{ currentInstitution.key.direccion}}</td>
+                    <td>{{ currentInstitution.key.cuit}}</td>
+
+                    <td>
+                        <a class="edit" data-toggle="modal" mat-button (click)="edit(currentInstitution.key)">
+                            <i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i>
+                        </a>
+
+                        <a class="delete" (click)="delete(currentInstitution.key)">
+                            <i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

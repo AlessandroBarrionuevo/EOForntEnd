@@ -1,12 +1,10 @@
-import { AlumnosComponent } from "../components/admin/alumnos/alumnos.component";
-import { Alumno } from "./alumno";
-
-export interface Curso{
+export interface ICurso{
+  id: number;
   nombre: string;
   descripcion: string;
   idProfesor: number;
   fechaInicio: string;
   fechaFin: string;
-//  listaAlumnos: Alumno[];
- // estado: any;
+  estado: string;
+  institucionId: number;
 }

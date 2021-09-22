@@ -17,6 +17,15 @@ import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { InstitucionComponent } from './components/admin/institucion/institucion.component';
+import { InstitucionService } from './services/institucion.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InstitucionFormComponent } from './components/admin/form-institucion/form-institucion.component';
+
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CursosService } from './services/cursos.service';
+import { CursosComponent } from './components/admin/cursos/cursos.component';
+import { CursosFormComponent } from './components/admin/form-cursos/form-cursos.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -38,6 +47,11 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     LogoutComponent,
     CrearAlumnoComponent,
 
+    InstitucionComponent,
+    InstitucionFormComponent,
+
+    CursosComponent,
+    CursosFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,12 +68,17 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot({timeOut:2000, progressBar: true, progressAnimation:'decreasing', preventDuplicates: true}),
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [
     {
       provide: MSAL_INSTANCE, useFactory: MSALInstanceFactory
     },
-    MsalService
+    MsalService,
+
+    InstitucionService,
+    CursosService
   ],
   bootstrap: [AppComponent]
 })
