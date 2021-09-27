@@ -4,7 +4,6 @@ import { InstitucionService } from 'src/app/services/institucion.service';
 import { IInstitucion } from "../../../models/institucion";
 
 import { Router } from '@angular/router';
-import { InstitucionFormComponent } from '../form-institucion/form-institucion.component';
 
 @Component({
     templateUrl: './institucion.component.html',
@@ -62,14 +61,12 @@ export class InstitucionComponent implements OnInit {
 
     //Envia al form para crear institucion
     public create() : void{
-        InstitucionFormComponent._sIsEditMode = false;
-        this.router.navigate(["/institucion/", -1]);
+        this.router.navigate(["/institucion/cou", {id: ""}]);
     }
 
     //Envia al form para modificar institucion
     public edit(institucion: IInstitucion): void {
-        InstitucionFormComponent._sIsEditMode = true;
-        this.router.navigate(["/institucion/", institucion.id]);
+        this.router.navigate(["/institucion/cou", {id: institucion.id}]);
     }
 
     //elimina UNA institucion

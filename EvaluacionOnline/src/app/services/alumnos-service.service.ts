@@ -5,32 +5,36 @@ import { Alumno } from '../models/alumno';
 import { ICurso } from '../models/curso';
 import { Usuario } from '../models/usuario';
 
+import { EstadoHelper } from '../helpers/EstadosHelper';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AlumnosServiceService {
   private _cursos: ICurso[] = [
     {
-      id: 1,
-      nombre: "Programacion IV",
-      idProfesor: 2,
-      descripcion: "programacion en angular",
-      fechaInicio: "09-08-2021",
-      fechaFin: "09-12-2021",
-      estado: "Abierto",
-      institucionId: 1010,
+        id: 1,
+        nombre: "Programacion IV",
+        idProfesor: 2,
+        descripcion: "programacion en angular",
+        fechaInicio: new Date("2021-09-08"), //año-mes-dia
+        fechaFin: new Date("2021-09-12"), //año-mes-dia
+        estado: EstadoHelper._sEstados[0].nombre,
+        institucion: null,
     },
     {
-      id: 2,
-      nombre: 'tecnicas avanzadas de programacion',
-      idProfesor: 5,
-      descripcion: "programacion en kotlin",
-      fechaInicio: "12-08-2021",
-      fechaFin: "12-12-2021",
-      estado: "Abierto",
-      institucionId: 1010,
+        id: 2,
+        nombre: 'tecnicas avanzadas de programacion',
+        idProfesor: 5,
+        descripcion: "programacion en kotlin",
+        fechaInicio: new Date("2021-12-08"), //año-mes-dia
+        fechaFin: new Date("2022-03-12"), //año-mes-dia
+        estado: EstadoHelper._sEstados[1].nombre,
+        institucion: null,
     }
-  ];
+];
+
+
 
 
   listaAlumnos: Alumno[] = [

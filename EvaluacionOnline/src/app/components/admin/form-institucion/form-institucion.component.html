@@ -3,7 +3,7 @@
         <div class="col">
         </div>
         <div class="col-5">
-            <form class="form_container" [formGroup]="_form" (ngSubmit)="isEditMode ? edit() : create()">
+            <form class="form_container" [formGroup]="_form" (ngSubmit)="_isUpdateMode ? edit() : create()">
                 <!-- Name field-->
                 <div class="field_container">
                     <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
@@ -46,16 +46,19 @@
                         <div *ngIf="cuit.errors?.maxlength">
                             Cuit debe tener 11 caracteres.
                         </div>
+                        <div *ngIf="cuit.errors?.cuitValid">
+                            Cuit invalido
+                        </div>
                     </div>
                 </div>
 
                 <!-- Login, register buttons-->
                 <div class="buttons_container">
-                    <div *ngIf="isEditMode">
+                    <div *ngIf="_isUpdateMode">
                         <button type="submit" class="btn btn-outline-primary button" [disabled]="_usingService">
                             Modificar</button>
                     </div>
-                    <div *ngIf="!isEditMode">
+                    <div *ngIf="!_isUpdateMode">
                         <button type="submit" class="btn btn-outline-primary button" [disabled]="_usingService">
                             Crear</button>
                     </div>

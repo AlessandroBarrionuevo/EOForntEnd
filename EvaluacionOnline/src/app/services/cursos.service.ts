@@ -1,73 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, scheduled, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ICurso } from '../models/curso';
-
-import { of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CursosService {
-    private _cursos: ICurso[] = [
-        {
-            id: 1,
-            nombre: "Programacion IV",
-            idProfesor: 2,
-            descripcion: "programacion en angular",
-            fechaInicio: "09-08-2021",
-            fechaFin: "09-12-2021",
-            estado: "Abierto",
-            institucionId: 1010,
-        },
-        {
-            id: 2,
-            nombre: 'tecnicas avanzadas de programacion',
-            idProfesor: 5,
-            descripcion: "programacion en kotlin",
-            fechaInicio: "12-08-2021",
-            fechaFin: "12-12-2021",
-            estado: "Abierto",
-            institucionId: 1010,
-        }
-    ];
+    private _cursos: ICurso[];
 
     private readonly _apiURL: string = "api/curso"; //o cursos?
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this._cursos = [];
+    }
 
     getCursos(): Observable<ICurso[]> {
-        return new Observable((observer: Subscriber<any>) => {
-            this._cursos.forEach( (value, index) =>{
-                observer.next(value);
-            });
+        return this.http.get<ICurso[]>(this._apiURL);
+    }
 
-              observer.complete();
-        });
-
-        //return this.http.get<ICurso[]>(this._apiURL);
+    getCursos2(): ICurso[] {
+        return this._cursos;
     }
 
     getCursosById(cursoId: number): Observable<ICurso> {
-        return Observable.create((observer: Subscriber<any>) => {
-            observer.next(this._cursos.find(it => it.id == cursoId));
+        return this.http.get<ICurso>(this._apiURL + '/' + cursoId);
+    }
 
-            observer.complete();
-        });
-        //return this.http.get<ICurso>(this._apiURL + '/' + cursoId);
+    getCursosById2(cursoId: number): ICurso {
+        return this._cursos.find(it => it.id == cursoId);
     }
 
     //post devuelve null, ya que la webapi devuelve void
     postCursos(curso: ICurso): Observable<ICurso> {
-        return Observable.create((observer: Subscriber<any>) => {
-            observer.next(this._cursos.push(curso));
-
-            observer.complete();
-        });
-        //return this.http.post<ICurso>(this._apiURL, curso);
+        return this.http.post<ICurso>(this._apiURL, curso);
     }
 
-    private internalUpdateCurso(curso: ICurso) {
+    postCursos2(curso: ICurso) {
+        this._cursos.push(curso);
+    }
+
+    putCursos(curso: ICurso): Observable<ICurso> {
+        return this.http.put<ICurso>(this._apiURL, curso);
+    }
+
+    putCursos2(curso: ICurso): void {
         let updateItem = this._cursos.find(it => it.id == curso.id);
 
         let index = this._cursos.indexOf(updateItem);
@@ -75,29 +52,13 @@ export class CursosService {
         this._cursos[index] = curso;
     }
 
-    putCursos(curso: ICurso): Observable<ICurso> {
-        return Observable.create((observer: Subscriber<any>) => {
-            observer.next(this.internalUpdateCurso(curso));
-
-            observer.complete();
-        });
-
-        //return this.http.put<ICurso>(this._apiURL, curso);
+    deleteCursos(cursoId: number): Observable<ICurso> {
+        return this.http.delete<ICurso>(this._apiURL + '/' + cursoId)
     }
 
-    private internalDeleteCurso(cursoId: number) {
+    deleteCursos2(cursoId: number) {
         let index = this._cursos.findIndex(it => it.id == cursoId);
         if (index != -1)
-            delete this._cursos[index];
-    }
-
-    deleteCursos(cursoId: number): Observable<ICurso> {
-        return Observable.create((observer: Subscriber<any>) => {
-            observer.next(this.internalDeleteCurso(cursoId));
-
-            observer.complete();
-        });
-
-        //return this.http.delete<ICurso>(this._apiURL + '/' + cursoId)
+            this._cursos.splice(index, 1);
     }
 }

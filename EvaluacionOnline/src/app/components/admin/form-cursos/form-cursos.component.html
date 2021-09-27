@@ -3,7 +3,7 @@
         <div class="col">
         </div>
         <div class="col-5">
-            <form class="form_container" [formGroup]="_form" (ngSubmit)="isEditMode ? edit() : create()">
+            <form class="form_container" [formGroup]="_form" novalidate (ngSubmit)="_isUpdateMode ? edit() : create()">
                 <!-- Name field-->
                 <div class="field_container">
                     <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
@@ -53,38 +53,49 @@
 
                 <!-- Fecha inicio field-->
                 <div class="field_container">
-                    <input type="date" class="form-control" formControlName="fechaInicio">
+                    <label><strong>Fecha inicio</strong></label>
+                    <input type="date" class="form-control" formControlName="fechaInicio"
+                        min="{{_minDate | date:'yyyy-MM-dd'}}" useValueAsDate>
                     <div *ngIf="fechaInicio.errors && (fechaInicio.dirty || fechaInicio.touched)">
                         <div *ngIf="fechaInicio.errors?.required">
                             Fecha requerida.
+                        </div>
+                        <div *ngIf="fechaInicio.errors?.errorMsg">
+                            Fecha inicio tiene que ser menor a la fecha fin
                         </div>
                     </div>
                 </div>
 
                 <!-- Fecha fin field-->
                 <div class="field_container">
-                    <input type="date" class="form-control" formControlName="fechaFin">
+                    <label><strong>Fecha fin</strong></label>
+                    <input type="date" class="form-control" formControlName="fechaFin"
+                        min="{{_maxDate | date:'yyyy-MM-dd'}}" useValueAsDate>
                     <div *ngIf="fechaFin.errors && (fechaFin.dirty || fechaFin.touched)">
                         <div *ngIf="fechaFin.errors?.required">
                             Fecha requerida.
+                        </div>
+                        <div *ngIf="fechaInicio.errors?.errorMsg">
+                            Fecha fin tiene que ser mayor a la fecha inicio
                         </div>
                     </div>
                 </div>
 
                 <!-- Estado field-->
                 <div class="field_container">
-                    <input type="text" class="form-control" formControlName="estado">
-                    <div *ngIf="estado.errors && (estado.dirty || estado.touched)">
-                        <div *ngIf="estado.errors?.required">
-                            Estado requerido.
-                        </div>
-                    </div>
+                    <label><strong>Estado</strong></label>
+                    <select class="form-control" formControlName="estado">
+                        <option *ngFor="let currentEstado of estados;" [value]="currentEstado.id">
+                            {{currentEstado.nombre}}
+                        </option>
+                    </select>
                 </div>
 
                 <!-- Institucion field-->
                 <div class="field_container">
+                    <label><strong>Instituciones</strong></label>
                     <select class="form-control" formControlName="institucion">
-                        <option *ngFor="let currentInstitucion of _instituciones;" [value]="currentInstitucion.id" [selected]="_institucionSelected === 0">
+                        <option *ngFor="let currentInstitucion of _instituciones;" [value]="currentInstitucion.id">
                             {{currentInstitucion.nombre}}
                         </option>
                     </select>
@@ -92,12 +103,12 @@
 
                 <!-- Login, register buttons-->
                 <div class="buttons_container">
-                    <div *ngIf="isEditMode">
-                        <button type="submit" class="btn btn-outline-primary button" [disabled]="_usingService">
+                    <div *ngIf="_isUpdateMode">
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="_usingService">
                             Modificar</button>
                     </div>
-                    <div *ngIf="!isEditMode">
-                        <button type="submit" class="btn btn-outline-primary button" [disabled]="_usingService">
+                    <div *ngIf="!_isUpdateMode">
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="_usingService">
                             Crear</button>
                     </div>
 

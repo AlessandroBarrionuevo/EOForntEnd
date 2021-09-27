@@ -6,28 +6,14 @@
 }
 
 .field_container{
-    margin-top: 12px;
-}
-
-.forget_password_container{
-    margin-top: 12px;
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
+    margin-top: 14px;
+    width: 100%;
 }
 
 .buttons_container{
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap;
-}
-
-.as_text {
-    background:none;
-    border:none;
-    margin:0;
-    padding:0;
-    cursor: pointer;
 }
 
 .button{

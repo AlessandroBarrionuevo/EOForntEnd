@@ -7,6 +7,8 @@ import { IInstitucion } from 'src/app/models/institucion';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { cuitValidator } from 'src/app/validators/cuitValidators';
+
 @Component({
     templateUrl: './form-institucion.component.html',
     styleUrls: ['./form-institucion.component.css']
@@ -19,15 +21,13 @@ export class InstitucionFormComponent implements OnInit {
 
     public _usingService: boolean;
 
-    public static _sIsEditMode: boolean;
+    public _isUpdateMode: boolean;
 
     public constructor(
         private formBuilder: FormBuilder,
         private service: InstitucionService,
         private activatedRoute: ActivatedRoute,
         private _snackBar: MatSnackBar) {
-
-        this._id = -1;
 
         this._form = this.formBuilder.group({
             nombre: [
@@ -48,69 +48,55 @@ export class InstitucionFormComponent implements OnInit {
             ],
             cuit: new FormControl("", [
                 Validators.required,
-                Validators.maxLength(11)
+                Validators.maxLength(11),
+                cuitValidator
             ])
         });
 
     }
 
-    private isValidCUIT(cuil: string): boolean {
-        if (cuil.length !== 11) {
-            return false;
+    public ngOnInit(): void {
+        let tempId = this.activatedRoute.snapshot.paramMap.get("id");
+
+        if (tempId.length == 0) {
+            this._id = -1;
+            this._isUpdateMode = false;
+            console.log("creacion mode on");
         }
+        else {
+            if (!isNaN(Number(tempId))) {
+                this._isUpdateMode = true;
+                this._id = +tempId;
 
-        const [checkDigit, ...rest] = cuil
-            .split('')
-            .map(Number)
-            .reverse();
+                this.service.getInstitucionById(this._id).subscribe(
+                    data => {
+                        this.nombre.setValue(data.nombre);
 
-        const total = rest.reduce(
-            (acc, cur, index) => acc + cur * (2 + (index % 6)),
-            0,
-        );
+                        this.direccion.setValue(data.direccion);
 
-        const mod11 = 11 - (total % 11);
-
-        if (mod11 === 11) {
-            return checkDigit === 0;
+                        this.cuit.setValue(data.cuit);
+                    },
+                    error => {
+                        console.error(error);
+                    }
+                );
+                console.log("es numero edit mode on");
+            }
+            else {
+                //es un string o cualquier cosa
+                console.log("es un string o cualquier cosa, creation mode on");
+                this._isUpdateMode = false;
+                this._id = -1;
+            }
         }
-
-        if (mod11 === 10) {
-            return false;
-        }
-
-        return checkDigit === mod11;
     }
-
+    
     private openSnackBar(message: string, actionStr: string, durationMs: number) {
         this._snackBar.dismiss();
         this._snackBar.open(message, actionStr, {
             horizontalPosition: "right",
             verticalPosition: "top",
             duration: durationMs
-        });
-    }
-
-    public ngOnInit(): void {
-        this.activatedRoute.params.subscribe((params) => {
-            this.service.getInstitucionById(params.id).subscribe(
-                data => {
-                    if (!isNaN(params.id)) {
-                        InstitucionFormComponent._sIsEditMode = true;
-
-                        this._id = data.id;
-
-                        this.nombre.setValue(data.nombre);
-
-                        this.direccion.setValue(data.direccion);
-
-                        this.cuit.setValue(data.cuit);
-                    }
-                },
-                error => {
-                    console.error(error);
-                }
-            );
         });
     }
 
@@ -124,10 +110,6 @@ export class InstitucionFormComponent implements OnInit {
         };
 
         return institucion;
-    }
-
-    public get isEditMode(): boolean {
-        return InstitucionFormComponent._sIsEditMode;
     }
 
     public get nombre() {
@@ -146,12 +128,7 @@ export class InstitucionFormComponent implements OnInit {
     public create() {
         if (!this._form.valid)
             return;
-
-        /*if (!this.isValidCUIT(this.cuit.value)) {
-            console.log("cuit invalido");
-            return;
-        }*/
-
+            
         this._usingService = true;
 
         this.service.postInstitucion(this.getInstitucion()).subscribe(

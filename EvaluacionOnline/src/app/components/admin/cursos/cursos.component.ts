@@ -28,7 +28,6 @@ export class CursosComponent implements OnInit {
         this._enableCRUDButtons = false;
 
         this._map = new Map<ICurso, boolean>();
-
     }
 
     ngOnInit(): void {
@@ -36,19 +35,51 @@ export class CursosComponent implements OnInit {
     }
 
     private getAllData() {
-        this.cursoService.getCursos().subscribe(
-            cursos =>{
-                this._map.clear();
+        let tempCursos = this.cursoService.getCursos2();
+        console.dir(tempCursos);
 
-                for(var i = 0; cursos.length; ++i)
-                    this._map.set(cursos[i], false);
-                
-                this._enableCRUDButtons = true;
+        this._map.clear();
+        for (var i = 0; i < tempCursos.length; ++i)
+            this._map.set(tempCursos[i], false);
+
+        /*this.cursoService.getCursos().subscribe(
+            data =>{
+                for(var i = 0; i < data.length; ++i)
+                    this._map.set(data[i], false);
+            }
+        );*/
+        
+        //instituciones
+        this.institucionService.getInstituciones().subscribe(
+            instituciones => { 
+                if (instituciones.length > 0) {
+                    let tempMap = new Map<ICurso, boolean>();
+
+                    this._map.forEach((value, key) => {
+                        let curso: ICurso = {
+                            id: key.id,
+                            nombre: key.nombre,
+                            descripcion: key.descripcion,
+                            estado: key.estado,
+                            fechaInicio: key.fechaInicio,
+                            fechaFin: key.fechaFin,
+                            idProfesor: key.idProfesor,
+                            institucion: key.institucion
+                        }
+                        tempMap.set(curso, value);
+                    });
+
+                    this._map.clear();
+                    tempMap.forEach((value, key) => {
+                        this._map.set(key, value);
+                    });
+
+                    this._enableCRUDButtons = true;
+                }
             },
-            error =>{
-                console.error(error);
-
+            error => {
                 this._enableCRUDButtons = true;
+                console.error(error);
             }
         );
     }
@@ -69,32 +100,34 @@ export class CursosComponent implements OnInit {
 
     //Envia al form para crear un curso
     public create(): void {
-        //InstitucionForm._sIsEditMode = false;
-        this.router.navigate(["/cursos/", -1]);
+        this.router.navigate(["/cursos/cou", { id: "" }]);
     }
 
     //Envia al form para modificar curso
     public edit(curso: ICurso): void {
-        //InstitucionForm._sIsEditMode = true;
-        this.router.navigate(["/cursos/", curso.id]);
+        this.router.navigate(["/cursos/cou", { id: curso.id }]);
     }
 
     //elimina UN curso
     public delete(curso: ICurso): void {
         this._enableCRUDButtons = false;
 
-        this.institucionService.deleteInstitucion(curso.id).subscribe(
-            data => {
-                console.log(data);
-                console.dir(curso);
+        this.cursoService.deleteCursos2(curso.id);
 
-                this.getAllData();
-            },
-            error => {
-                this._enableCRUDButtons = true;
-                console.log(error);
-            }
-        )
+        this.getAllData();
+        /*
+                this.cursoService.deleteCursos(curso.id).subscribe(
+                    data => {
+                        console.log(data);
+                        console.dir(curso);
+        
+                        this.getAllData();
+                    },
+                    error => {
+                        this._enableCRUDButtons = true;
+                        console.log(error);
+                    }
+                )*/
     }
 
     //Elimina los cursos seleccionados, uno por uno

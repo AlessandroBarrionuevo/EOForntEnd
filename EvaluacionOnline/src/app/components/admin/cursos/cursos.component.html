@@ -33,7 +33,7 @@
                         </span>
                     </th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripccion</th>
+                    <th scope="col">Descripcion</th>
                     <th scope="col">Profesor</th>
                     <th scope="col">Fecha inicio</th>
                     <th scope="col">Fecha fin</th>
@@ -51,14 +51,19 @@
                         </span>
                     </th>
                     <td>{{currentCurso.key.nombre}}</td>
-                    <td>{{currentCurso.key.descripccion}}</td>
+                    <td>{{currentCurso.key.descripcion}}</td>
                     <td>{{currentCurso.key.profesor}}</td>
-                    <td>{{currentCurso.key.fechaInicio}}</td>
-                    <td>{{currentCurso.key.fechaFin}}</td>
+                    <td>{{currentCurso.key.fechaInicio | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{currentCurso.key.fechaFin | date: 'dd/MM/yyyy'}}</td>
                     <td>{{currentCurso.key.estado}}</td>
-                    <td>{{currentCurso.key.institucion}}</td>
+                    <td *ngIf="currentCurso.key.institucion != null; else elseBlock;">
+                        {{currentCurso.key.institucion.nombre}}
+                    </td>
+                    <ng-template #elseBlock>
+                        <td></td>
+                    </ng-template>
                     <td>
-                        <a class="edit" data-toggle="modal" mat-button (click)="edit(currentCurso.key)">
+                        <a class="edit" (click)="edit(currentCurso.key)">
                             <i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i>
                         </a>
 

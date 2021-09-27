@@ -1,10 +1,12 @@
+import { IInstitucion } from "./institucion";
+
 export interface ICurso{
   id: number;
   nombre: string;
   descripcion: string;
   idProfesor: number;
-  fechaInicio: string;
-  fechaFin: string;
+  fechaInicio: Date;
+  fechaFin: Date;
   estado: string;
-  institucionId: number;
+  institucion: IInstitucion;
 }
