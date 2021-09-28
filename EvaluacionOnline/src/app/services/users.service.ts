@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Usuario } from '../models/usuario';
@@ -12,7 +13,7 @@ export class UsersService {
     ,{ id: 5, nickName: 'profeB', password: 'profeB', idRol: 2 }
   ]
   
-  constructor(public autho: AuthService) { }
+  constructor(public autho: AuthService, private http: HttpClient) { }
 
   listadoUsuarios(): Usuario[] {
     return this.listaUsuarios;
@@ -32,13 +33,14 @@ export class UsersService {
     return usuarioEncontrado;
   }
 
-  obtenerDatosDeUsuario(): any {
-    let datos: string;
-
-    if (this.autho.isAuthenticated$) {
-      this.autho.user$.subscribe(
-      (profile) => (datos = JSON.stringify(profile, null))
-    );
-    }
+  registrarUsuario(alumno: any) {
+    return this.http.post('/api/Register', alumno);
   }
+
+  LoginUsuario(alumno: any) {
+    return this.http.post('/api/Login', alumno);
+  }
+
+  
+  
 }

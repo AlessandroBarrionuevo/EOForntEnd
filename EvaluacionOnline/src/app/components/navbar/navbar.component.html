@@ -44,3 +44,31 @@
   <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/alumnos', usuario.id]">Alumnos</a></h5>
   <h5 class="titulo-navbar" *ngIf=""><a class="link-navbar" [routerLink]="['/login']">Desloguearse</a></h5>
 </div> -->
+
+<!-- 
+<div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 1">
+  <img
+          [src]="user.picture"
+          alt="User's profile picture"
+          class="rounded-circle img-fluid profile-picture"
+        />
+  <h5>{{ user.name }}</h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', 1]">Alumnos</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Profesores</a></h5>
+  <button class="btn btn-outline-info btnlog" (click)="logout()" *ngIf="isLoggedIn()">Desloguearse</button>
+  <button class="btn btn-outline-info btnlog" (click)="login()" *ngIf="!isLoggedIn()">Loggearse</button>
+</div>
+
+<div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 2">
+  <img
+          [src]="user.picture"
+          alt="User's profile picture"
+          class="rounded-circle img-fluid profile-picture"
+  />
+  <h5>{{ user.name }}</h5>
+  <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/home']">Home</a></h5>
+  <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/alumnos', 1]">Alumnos</a></h5>
+  <button class="btn btn-outline-info btnlog" (click)="logout()" *ngIf="isLoggedIn()">Desloguearse</button>
+  <button class="btn btn-outline-info btnlog" (click)="login()" *ngIf="!isLoggedIn()">Loggearse</button>
+</div> -->

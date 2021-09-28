@@ -1,1 +1,2 @@
-<button class="btn btn-success" type="submit" (click)="logout()">logout</button>
+<button (click)="signIn()" *ngIf="user == null"> entrar</button>
+<button (click)="signOut()" *ngIf="user != null"> salir</button>

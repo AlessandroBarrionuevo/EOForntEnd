@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-common';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { ExternalAuthDto } from 'src/app/models/authDto';
 import { Usuario } from 'src/app/models/usuario';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -13,8 +16,9 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  usuario: Usuario;
-  listaUsuarios: Usuario[];
+
+  socialUser: SocialUser;
+  isLoggedin: boolean;  
 
   loginForm: FormGroup = new FormGroup({
     nickName: new FormControl('', [
@@ -24,52 +28,59 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(public autho: AuthService, private router: Router,
-    private userService: UsersService, private msalService: MsalService) { }
+    private userService: UsersService, private _authService: AuthenticationService, private socialAuthService: SocialAuthService) { }
 
   ngOnInit(): void {
-   /* this.listaUsuarios = this.userService.listadoUsuarios();
-    if (this.autho.isAuthenticated$) {
-      this.router.navigate(['navbar']);  
-    }*/
+  
 
-    if (this.isLoggedIn()) {
-      console.log(this.isLoggedIn());
+  }
+
+  public externalLogin = () => {
+    this._authService.signInWithGoogle()
+    .then(res => {
+      const user: SocialUser = { ...res };
+      this.socialUser = user;
+      console.log(user);
+      const externalAuth: ExternalAuthDto = {
+        provider: user.provider,
+        idToken: user.idToken
+      }
+
+      this.validateExternalAuth(externalAuth);
       
-      this.router.navigate(['home', 1]);
-    }
-  }
-
-  // Login(nickName: string) {
-  //   this.usuario = this.userService.BuscarUsuarioEnListaPorLogin(nickName);
-
-  //   if (!this.loginForm.invalid){ 
-  //     if (this.usuario != null) {
-  //       this.router.navigate(['home', this.usuario.id]);
-  //     } else {
-  //       console.log('err')
-  //     }
-  //   }
-  // }
-
-  // loginWithRedirect() {
-  //   this.autho.loginWithRedirect();
-    
-  // }
-
-  login() {
-    this.msalService.loginPopup().subscribe(
-      (r: AuthenticationResult) => {
-        this.msalService.instance.setActiveAccount(r.account);
-       }
-    )
-  }
-
-  isLoggedIn(): boolean {
-    return this.msalService.instance.getActiveAccount() != null;
+      this.socialAuthService.authState.subscribe((user) => {
+        console.dir("respuesta authState" )
+        console.log(user);
+        
+        this.socialUser = user;
+        if (this.socialUser != null) { 
+          this.isLoggedin = true;
+        }
+      });
+      
+      this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+        console.log(res);
+      });
+    }, error => console.log(error))
   }
 
   logout() {
-    this.msalService.logout();
+    this._authService.signOutExternal()
+  }
+
+  private validateExternalAuth(externalAuth: ExternalAuthDto) {
+    this._authService.externalLogin( externalAuth)
+      .subscribe(res => {
+        localStorage.setItem("token", res.authToken);
+      },
+      error => {
+        this._authService.signOutExternal();
+      });
+  }
+
+  refreshUserToken() {
+    this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+      console.log(res);
+    });
   }
 }
-//Login(loginForm.value.nickName, loginForm.value.password)

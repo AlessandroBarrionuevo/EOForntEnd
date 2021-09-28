@@ -15,8 +15,11 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { CrearAlumnoComponent } from './components/admin/crear-alumno/crear-alumno.component';
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+// import { InterceptorService } from './interceptors/interceptor.service';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -44,6 +47,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
+    SocialLoginModule,
     AuthModule.forRoot({
       domain: 'dev-ujo91807.us.auth0.com',
       clientId: 'ucFC7RwL2TMvmcU9CrkAyQkfmbPZkX2v',
@@ -56,10 +60,32 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     ToastrModule.forRoot({timeOut:2000, progressBar: true, progressAnimation:'decreasing', preventDuplicates: true}),
   ],
   providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: InterceptorService,
+    //   multi: true
+    // },
+    // {
+    //   provide: MSAL_INSTANCE, useFactory: MSALInstanceFactory
+    // },
+    // MsalService
     {
-      provide: MSAL_INSTANCE, useFactory: MSALInstanceFactory
-    },
-    MsalService
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '941952913538-2rfqdi5edd11nbscroboc7fe1cannel8.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

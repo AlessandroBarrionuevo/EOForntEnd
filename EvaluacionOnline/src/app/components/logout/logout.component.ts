@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { GapiServiceService } from 'src/app/services/gapi-service.service';
 
 @Component({
   selector: 'app-logout',
@@ -8,12 +9,31 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  user: gapi.auth2.GoogleUser
+
+  constructor(private gapi: GapiServiceService) { }
 
   ngOnInit(): void {
+    this.gapi.observable().subscribe(
+      (r) => {
+        this.user = r
+        console.log(r);
+      },
+      (err) => { 
+        console.log(err);
+        
+      }
+    )
   }
 
-  logout() {
-    this.auth.logout();
+  signIn() { 
+    this.gapi.signIn()
   }
+
+  signOut() { 
+    this.gapi.signOut();
+  
+  }
+
+
 }

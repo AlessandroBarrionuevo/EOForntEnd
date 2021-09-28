@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
-import { User } from '@auth0/auth0-spa-js';
-import { MsalService } from '@azure/msal-angular';
-import { AuthenticationResult } from '@azure/msal-browser';
-import { Usuario } from 'src/app/models/usuario';
 import { UsersService } from 'src/app/services/users.service';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ExternalAuthDto } from 'src/app/models/authDto';
 
 @Component({
   selector: 'app-home',
@@ -13,38 +11,72 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  usuario: Usuario;
-  datos: string = null;
+  usuario: any;
+  socialUser: SocialUser;
+  isLoggedin: boolean = false;  
   
-  constructor(private route: ActivatedRoute, public auth: MsalService,
-    private user: UsersService, private msalService: MsalService,
-    private router: Router) { }//this.id = route.snapshot.params['id']; }
+  constructor(private route: ActivatedRoute, private user: UsersService, private router: Router, private _authService: AuthenticationService, private socialAuthService: SocialAuthService) { }
 
   ngOnInit(): void {
-    let a = this.auth.instance.getActiveAccount();
-
-    console.log(a);
-    
-  }
-
-  login() {
-    this.msalService.loginPopup().subscribe(
-      (r: AuthenticationResult) => {
-        this.msalService.instance.setActiveAccount(r.account);
-       }
-    )
-  }
-
-  isLoggedIn(): boolean {
-    return this.msalService.instance.getActiveAccount() != null;
-  }
-
-  logout() {
-    this.msalService.logout();
+    if (localStorage.getItem("APP_TOKEN") != null) { 
+      this.isLoggedin = true;
+      this.socialAuthService.authState.subscribe(
+        (r) => { this.socialUser = r }
+      )
+    }
+   
+    console.log(this.socialUser);
   }
 
   irAAlumnos() {
     this.router.navigate(['alumnos', 1]);
+  }
+
+  externalLogin = () => {
+    this._authService.signInWithGoogle()
+    .then(res => {
+      const user: SocialUser = { ...res };
+      this.socialUser = user;
+      localStorage.setItem("APP_TOKEN", res.idToken);
+      console.log(localStorage.getItem("APP_TOKEN"));
+      
+      const externalAuth: ExternalAuthDto = {
+        provider: user.provider,
+        idToken: user.idToken
+      }
+
+      this.validateExternalAuth(externalAuth);
+
+      
+      
+      this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+        //console.log(res);
+      });
+    }, error => console.log(error))
+  }
+  
+  logout() {
+    this.socialAuthService.signOut();
+    this.socialUser = null;
+    this.usuario = null;
+    localStorage.clear();
+  }
+
+  private validateExternalAuth(externalAuth: ExternalAuthDto) {
+    this._authService.externalLogin( externalAuth)
+      .subscribe(res => {
+       // console.log(res);
+        this.usuario = res
+      },
+      error => {
+        this._authService.signOutExternal();
+      });
+  }
+
+  refreshUserToken() {
+    this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+      console.log(res);
+    });
   }
 
 }

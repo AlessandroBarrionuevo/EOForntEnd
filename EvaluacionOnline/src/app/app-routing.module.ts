@@ -22,19 +22,19 @@ const routes: Routes = [
     path: 'alumnos/:id', component: AlumnosComponent, canActivate: [GuardGuard]
   },
   {
-    path:'alumno-detail/:id/:idUsuario', component: AlumnoDetailComponent, canActivate: [GuardGuard]
+    path:'alumno-detail/:id/:idUsuario', component: AlumnoDetailComponent//, canActivate: [GuardGuard]
   },
   {
-    path:'alumno-form/:id/:idUsuario', component: FormUpdateComponent, canActivate: [GuardGuard]
+    path:'alumno-form/:id/:idUsuario', component: FormUpdateComponent//, canActivate: [GuardGuard]
   },
   {
     path:'logout', component: LogoutComponent
   },
   {
-    path:'navbar', component: NavbarComponent, canActivate: [GuardGuard]
+    path:'navbar', component: NavbarComponent//, canActivate: [GuardGuard]
   },
   {
-    path:'crear-alumno', component: CrearAlumnoComponent, canActivate: [GuardGuard]
+    path:'crear-alumno', component: CrearAlumnoComponent//, canActivate: [GuardGuard]
   },
   
 ];

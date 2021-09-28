@@ -32,6 +32,33 @@
   </div>
 </div> -->
 
-<div class="align-center">
+<!-- <div class="align-center">
   <button class="btn btn-success" (click)= "login()">Login</button>
+</div>
+
+<div class="align-center">
+  <button class="btn btn-success" (click)= "logout()">Logout</button>
+</div> -->
+
+<div class="card">
+  <div class="card-body">
+      <h1 class="card-title">Login</h1>
+     
+      <hr>
+      <div>
+          <h2>External Providers</h2>
+
+          <div style="padding: 20px;">
+              <button class="btn btn-info" type="button" (click)="externalLogin()">Google</button>
+          </div>
+
+          <div style="padding: 20px;">
+            <button class="btn btn-info" type="button" (click)="logout()">Logut</button>
+          </div>
+
+          <div style="padding: 20px;">
+            <button class="btn btn-info" type="button" (click)="refreshUserToken()">refreshUserToken</button>
+        </div>
+      </div>
+  </div>
 </div>

@@ -1,0 +1,103 @@
+// home component msal login
+
+
+
+  // login() {
+  //   this.msalService.loginPopup().subscribe(
+  //     (r: AuthenticationResult) => {
+  //       this.msalService.instance.setActiveAccount(r.account);
+  //      }
+  //   )
+  // }
+
+  // isLoggedIn(): boolean {
+  
+  //   return this.msalService.instance.getActiveAccount() != null;
+  // }
+
+  // logout() {
+  //   this.msalService.logoutPopup();
+  // }
+
+  
+  // obtenerUsuario() {
+  //   let error;
+  //   let tokens: any = this.auth.instance.getActiveAccount().idTokenClaims;
+
+  //   let user: User = new User(
+  //     // 'asdasdasdasdasdasdasdasdasd123', this.msalService.instance.getActiveAccount().username, "barrionuevo",
+  //     // 'alessandro', 41709052, "direccion asd", "1164496163"
+  //     this.msalService.instance.getActiveAccount().username, this.msalService.instance.getActiveAccount().username,
+  //     '41709052', this.msalService.instance.getActiveAccount().username, 'gn 2438', '', tokens.sub
+  //   );
+  //   // this.user.registrarUsuario(user).subscribe(
+  //   //   (r) => { console.log(r); }
+  //   //   ,
+  //   //   (err) => { error = err}
+  //   // )
+    
+  //   this.user.LoginUsuario(user).subscribe(
+  //     (r) => { console.log(r); this.usuario = r }
+  //     ,
+  //     (err) => { error = err}
+  //   )
+    
+
+  // }
+
+
+  //Login component
+
+   /* this.listaUsuarios = this.userService.listadoUsuarios();
+    if (this.autho.isAuthenticated$) {
+      this.router.navigate(['navbar']);  
+    }*/
+
+    // if (this.isLoggedIn()) {
+    //   console.log(this.isLoggedIn());
+      
+    //   this.router.navigate(['home', 1]);
+    // }
+
+    
+  // Login(nickName: string) {
+  //   this.usuario = this.userService.BuscarUsuarioEnListaPorLogin(nickName);
+
+  //   if (!this.loginForm.invalid){ 
+  //     if (this.usuario != null) {
+  //       this.router.navigate(['home', this.usuario.id]);
+  //     } else {
+  //       console.log('err')
+  //     }
+  //   }
+  // }
+
+  // loginWithRedirect() {
+  //   this.autho.loginWithRedirect();
+    
+  // }
+
+  // login() {
+  //   this.msalService.loginPopup().subscribe(
+  //     (r: AuthenticationResult) => {
+  //       this.msalService.instance.setActiveAccount(r.account);
+  //      }
+  //   )
+  // }
+
+  // isLoggedIn(): boolean {
+  //   return this.msalService.instance.getActiveAccount() != null;
+  // }
+
+  // logout() {
+  //   this.msalService.logoutPopup();
+  // }
+
+  // public externalLogin = () => {
+  //   this._authService.signInWithGoogle()
+  //   .then(res => {
+  //     const user: SocialUser = { ...res };
+  //     console.log(user);
+  //   }, error => console.log(error))
+  // }
+//Login(loginForm.value.nickName, loginForm.value.password)

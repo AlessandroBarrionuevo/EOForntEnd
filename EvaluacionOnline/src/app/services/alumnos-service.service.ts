@@ -24,11 +24,13 @@ export class AlumnosServiceService {
     // }
   ]
 
+  token = {
+    "Token": "asdasdasdasdasdasdasdasdasd123"
+  }
+    
+
   constructor(private htppClient: HttpClient) { }
 
-  obtenerListadoAlumnos(): Alumno[] {
-    return this.listaAlumnos;
-  }
 
   buscarAlumnoEnListaPorId(id: number): Alumno {
     let alumnoEncontrado: Alumno;
@@ -49,6 +51,12 @@ export class AlumnosServiceService {
     })
   }
 
+  
+  obtenerListadoAlumnos(): Alumno[] {
+    return this.listaAlumnos;
+  }
+
+  //api
   obtenerAlumnoPorId(id: number) {
     return this.htppClient.get<any>('/api/Alumno/'+id);
   }

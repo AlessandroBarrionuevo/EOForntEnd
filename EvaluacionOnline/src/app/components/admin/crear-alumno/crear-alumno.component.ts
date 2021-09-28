@@ -32,14 +32,13 @@ export class CrearAlumnoComponent implements OnInit {
       alumno.value.dni, alumno.value.mail,
       alumno.value.direccion, alumno.value.telefono
     )
+
+    alumnoACrear.token = "asdasdasdasdasdasdasdasdasd123"
     this.alumnoService.crearAlumno(alumnoACrear).subscribe(
-      (r) => { if (r != null) {  this.alert.animacion('Su alumno se a creado correctamente'),this.router.navigate(['alumnos', 1]);} }
+      (r) => { if (r != null) { console.log(r);
+       this.alert.animacion('Su alumno se a creado correctamente'), this.router.navigate(['alumnos', 1]);} }
     )
-    console.log(alumnoACrear);
+
   }
-
-
-
-
 
 }
