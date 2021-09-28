@@ -1,4 +1,4 @@
-import { Curso } from "./curso";
+import { ICurso } from "./curso";
 import { Persona } from "./persona";
 
 export class Alumno implements Persona{
@@ -15,7 +15,7 @@ export class Alumno implements Persona{
   telefono: number;
   idUsuario: number;
   matricula: number;
-  listaCursos: Curso[];
+  listaCursos: ICurso[];
   id: number;
   token: any;
 }

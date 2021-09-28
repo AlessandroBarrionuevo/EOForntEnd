@@ -9,6 +9,10 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GuardGuard } from './guards/guard.guard';
+import { InstitucionComponent } from './components/admin/institucion/institucion.component';
+import { InstitucionFormComponent } from './components/admin/form-institucion/form-institucion.component';
+import { CursosComponent } from './components/admin/cursos/cursos.component';
+import { CursosFormComponent } from './components/admin/form-cursos/form-cursos.component';
 
 const routes: Routes = [
   
@@ -36,6 +40,22 @@ const routes: Routes = [
   {
     path:'crear-alumno', component: CrearAlumnoComponent//, canActivate: [GuardGuard]
   },
+
+  //Institucion
+  {
+    path: 'institucion', component: InstitucionComponent
+  },
+  {
+    path: 'institucion/:id', component: InstitucionFormComponent
+  },
+  
+  //Cursos
+  {
+    path: 'cursos', component: CursosComponent
+  },
+  {
+    path: 'cursos/:id', component: CursosFormComponent
+  }
   
 ];
 

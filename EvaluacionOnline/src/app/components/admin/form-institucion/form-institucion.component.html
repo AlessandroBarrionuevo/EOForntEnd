@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-5">
+            <form class="form_container" [formGroup]="_form" (ngSubmit)="isEditMode ? edit() : create()">
+                <!-- Name field-->
+                <div class="field_container">
+                    <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <div *ngIf="nombre.errors?.required">
+                            Nombre requerido.
+                        </div>
+                        <div *ngIf="nombre.errors?.minlength">
+                            Nombre debe tener al menos 5 caracteres.
+                        </div>
+                        <div *ngIf="nombre.errors?.maxlength">
+                            Nombre debe tener maximo 16 caracteres.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description field-->
+                <div class="field_container">
+                    <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion">
+                    <div *ngIf="direccion.errors && (direccion.dirty || direccion.touched)">
+                        <div *ngIf="direccion.errors?.required">
+                            Direccion requerida.
+                        </div>
+                        <div *ngIf="direccion.errors?.minlength">
+                            Direccion debe tener al menos 4 caracteres.
+                        </div>
+                        <div *ngIf="direccion.errors?.maxlength">
+                            Direccion debe tener maximo 32 caracteres.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CUIT field-->
+                <div class="field_container">
+                    <input type="text" class="form-control" placeholder="CUIT" formControlName="cuit">
+                    <div *ngIf="cuit.errors && (cuit.dirty || cuit.touched)">
+                        <div *ngIf="cuit.errors?.required">
+                            Cuit requerido.
+                        </div>
+                        <div *ngIf="cuit.errors?.maxlength">
+                            Cuit debe tener 11 caracteres.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login, register buttons-->
+                <div class="buttons_container">
+                    <div *ngIf="isEditMode">
+                        <button type="submit" class="btn btn-outline-primary button" [disabled]="_usingService">
+                            Modificar</button>
+                    </div>
+                    <div *ngIf="!isEditMode">
+                        <button type="submit" class="btn btn-outline-primary button" [disabled]="_usingService">
+                            Crear</button>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-primary button"
+                        [routerLink]="['/institucion/']">Regresar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>

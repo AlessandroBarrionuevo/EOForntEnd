@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
-import { Curso } from 'src/app/models/curso';
+import { ICurso } from 'src/app/models/curso';
 import { Usuario } from 'src/app/models/usuario';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { AlumnosServiceService } from 'src/app/services/alumnos-service.service';
@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   
 export class AlumnosComponent implements OnInit {
   lista: any[];
-  cursos: Curso[];
+  cursos: ICurso[];
   id: number;
   usuario: Usuario;
   respuesta: any;
