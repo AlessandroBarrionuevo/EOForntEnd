@@ -1,0 +1,147 @@
+<div style="text-align: center" class="barra">
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a>
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', 1]"
+      >Alumnos</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']"
+      >Profesores</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']"
+      >Desloguearse</a
+    >
+  </h5>
+</div>
+
+<div class="col-6 container">
+  <div class="border-login">
+    <div>
+      <h2 class="titulo-login">Modificar Institucion</h2>
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="idInstituto"
+        readonly="true"
+      />
+    </div>
+
+    <form
+      [formGroup]="institucionForm"
+      (submit)="modificarInstitucion(institucionForm)"
+      class="loginForm"
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          minlength="3"
+          maxlength="13"
+          placeholder="{{ institucion.nombre }}"
+          formControlName="nombre"
+        />
+
+        <div
+          *ngIf="
+            institucionForm.controls['nombre'].invalid &&
+            (institucionForm.controls['nombre'].dirty ||
+              institucionForm.controls['nombre'].touched)
+          "
+        >
+          <div
+            *ngIf="institucionForm.controls['nombre'].errors.required"
+            class="errors"
+          >
+            Se requiere el nombre
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          minlength="3"
+          maxlength="13"
+          placeholder="{{ institucion.direccion }}"
+          formControlName="direccion"
+        />
+
+        <div
+          *ngIf="
+            institucionForm.controls['direccion'].invalid &&
+            (institucionForm.controls['direccion'].dirty ||
+              institucionForm.controls['direccion'].touched)
+          "
+        >
+          <div
+            *ngIf="institucionForm.controls['direccion'].errors.required"
+            class="errors"
+          >
+            Se requiere una direccion
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          minlength="3"
+          maxlength="13"
+          placeholder="{{ institucion.cuit }}"
+          formControlName="cuit"
+        />
+
+        <div
+          *ngIf="
+            institucionForm.controls['cuit'].invalid &&
+            (institucionForm.controls['cuit'].dirty ||
+              institucionForm.controls['cuit'].touched)
+          "
+        >
+          <div
+            *ngIf="institucionForm.controls['cuit'].errors.required"
+            class="errors"
+          >
+            Se requiere un cuit
+          </div>
+        </div>
+
+        
+        <div
+        *ngIf="
+          institucionForm.controls['cuit'].invalid &&
+          (institucionForm.controls['cuit'].dirty ||
+            institucionForm.controls['cuit'].touched)
+        ">
+        <div
+          *ngIf="institucionForm.controls['cuit'].errors.pattern"
+          class="errors"
+        >
+          El cuit debe estar compuesto como xx-xxxxxxxx-x
+        </div>
+        
+      </div>
+
+    </div>
+
+      <div class="align-center">
+        <button
+          class="btn botonActualizar"
+          type="submit"
+          *ngIf="!institucionForm.invalid"
+          (click)="modificarInstitucion(institucionForm)"
+        >
+          Modificar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

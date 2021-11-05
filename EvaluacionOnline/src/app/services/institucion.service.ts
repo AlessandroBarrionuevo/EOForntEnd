@@ -8,7 +8,7 @@ import { IInstitucion } from '../models/institucion';
 })
 export class InstitucionService{
 
-    private readonly _apiURL: string = "api/institucion";
+    private readonly _apiURL: string = "api/Institucion";
 
     constructor(private http: HttpClient) {}
 
@@ -36,5 +36,26 @@ export class InstitucionService{
 
     deleteInstitucion(institucionId: number): Observable<IInstitucion> {
         return this.http.delete<IInstitucion>(this._apiURL + '/' + institucionId)
+    }
+
+    //metodos ale
+    obtenerIntituciones(): Observable<any> { 
+        return this.http.get<any>(this._apiURL)
+    }
+
+    obtenerIntitucionPorId(id: number): Observable<any> { 
+        return this.http.get<any>(this._apiURL + "/" + id)
+    }
+
+    crearInstitucion(institucion: any): Observable<any> { 
+        return this.http.post<any>(this._apiURL, institucion)
+    }
+
+    modificarInstitucion(institucion: any) { 
+        return this.http.put(this._apiURL, institucion)
+    }
+
+    borrarInstitucion(id: number) { 
+        return this.http.delete(`${this._apiURL}/${id}`)
     }
 }

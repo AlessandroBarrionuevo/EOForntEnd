@@ -1,0 +1,16 @@
+.datepicker{
+    display: flex;
+    flex-direction: column;
+
+}
+
+@media (min-width: 768px){
+    .p-md-4 {
+        padding: 0rem!important;
+    }
+}
+
+.label{
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+}

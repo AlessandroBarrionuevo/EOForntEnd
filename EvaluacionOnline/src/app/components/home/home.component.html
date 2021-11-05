@@ -1,28 +1,124 @@
-<nav class="navbar navbar-light"  class="navbarHome" >
-    <img src="{{socialUser.photoUrl}}" alt="" *ngIf="socialUser != null">
-    <a href="#" class="btn btn-outline-info btnlog" *ngIf="usuario != null">{{usuario.nombre}}</a>
-    <a href="#" class="btn btn-outline-info btnlog">Contacto</a>
-    <a href="#" class="btn btn-outline-info btnlog">Sobre nosotros</a>
-    <button class="btn btn-outline-info btnlog" (click)="logout()" *ngIf="socialUser != null">Desloguearse</button>
-    <button class="btn btn-outline-info btnlog" (click)="externalLogin()" *ngIf="socialUser == null">Loggearse</button>
+<nav class="navbar navbar-light" class="navbarHome">
+  <img
+    class="img-profile"
+    src="{{ socialUser.photoUrl }}"
+    alt=""
+    *ngIf="socialUser != null"
+  />
+  <p class="btn btn-outline-info btnlog" *ngIf="usuario != null">
+    {{ usuario.nombre }}
+  </p>
+
+  <a href="#" class="btn btn-outline-info btnlog" >Contacto</a>
+  <a href="#" class="btn btn-outline-info btnlog">Sobre nosotros</a>
+  <button
+    class="btn btn-outline-info btnlog"
+    (click)="logout()"
+    *ngIf="socialUser != null"
+  >
+    Desloguearse
+  </button>
+  <button
+    class="btn btn-outline-info btnlog"
+    (click)="externalLogin()"
+    *ngIf="socialUser == null"
+  >
+    Loggearse
+  </button>
+  <button
+    class="btn btn-outline-info btnlog"
+    (click)="registrarUsuario()"
+    *ngIf="socialUser == null"
+  >
+    Registrarse
+  </button>
 </nav>
 
-
- <!-- hasta aca navbar -->
+<!-- hasta aca navbar -->
 
 <div class="hero">
-    <div class="contenedor-hero">   
-    </div>
+  <div class="contenedor-hero"></div>
 </div>
 
 <div class="cartelHero">
-    <p class="text-cartel-hero" >Sistemas integral de evaluacion online</p>
+  <p class="text-cartel-hero" >Sistemas integral de evaluacion online</p>
 </div>
 
-
 <main class="servicios contenedor">
+  <div class="container-card">
+    <div class="card">
+      <figure>
+        <img src="../../../assets/img/profesor.jfif" />
+      </figure>
+      <div class="contenido-card">
+        <h3>Profesores</h3>
+        <div>
+          <p>Los mejores profesores del mercado utilizan nuestra plataforma.</p>
+        </div>
+        <button class="botonInfo boton alumno" (click)="irAProfesores()">
+          <span>+INFO</span>
+        </button>
+      </div>
+    </div>
 
-    <div class="contenedor-Imagen">
+    <div class="card">
+      <figure>
+        <img src="../../../assets/img/alumno.jfif" />
+      </figure>
+      <div class="contenido-card">
+        <h3>Alumnos</h3>
+        <div>
+          <p>
+           Podras encontrar tus calificaciones, evaluaciones e informacion de tus cursos.
+          </p>
+        </div>
+        <button class="botonInfo boton alumno" (click)="irAAlumnos()">
+          <span>+INFO</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <figure>
+        <img src="../../../assets/img/academias.jfif" />
+      </figure>
+      <div class="contenido-card">
+        <h3>Instituciones</h3>
+        <div>
+          <p>
+            Los Institutos mas prestigiosos de la region utilizan EvaluacionOnline.
+          </p>
+        </div>
+        <div class="linkImagen">
+          <button class="botonInfo boton alumno" (click)="irAInstituciones(usuario.id)">
+            <span>+INFO</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <figure>
+        <img src="../../../assets/img/examenes.jfif" />
+      </figure>
+      <div class="contenido-card">
+        <h3>Cursos</h3>
+        <div>
+          <p>Las capacitaciones mas requeridas por el mercado laboral.</p>
+        </div>
+        <div class="linkImagen">
+          <button class="botonInfo boton alumno" (click)="irACursos()">
+            <span>+INFO</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!--Fin   Tarjetas-->
+
+<!-- <div class="contenedor-Imagen">
         <img src="../../../assets/img/profesor.jfif" alt="" class="imagenHome">
         <div class="tituloImagen"><h3>Profesores</h3></div>
         <div class="linkImagen"><button class="botonInfo" (click)="irAAlumnos()">+ INFO</button></div>
@@ -31,23 +127,19 @@
     <div class="contenedor-Imagen">
         <img src="../../../assets/img/alumno.jfif" alt="" class="imagenHome">
         <div class="tituloImagen"><h3>Alumnos</h3></div>
-        <div class="linkImagen"><button class="botonInfo" (click)="irAAlumnos()">+ INFO</button></div>
+        <div class="linkImagen"><button class="botonInfo boton alumno" (click)="irAAlumnos()"><span>+INFO</span></button></div>
     </div>
 
     <div class="contenedor-Imagen">
         <img src="../../../assets/img/academias.jfif" alt="" class="imagenHome">  
-        <div class="tituloImagen"><h3>Academia</h3></div>
-        <div class="linkImagen"><button class="botonInfo" (click)="irAAlumnos()">+ INFO</button></div> 
+        <div class="tituloImagen"><h3>Instituciones</h3></div>
+        z
     </div>
 
     <div class="contenedor-Imagen">
         <img src="../../../assets/img/examenes.jfif" alt="" class="imagenHome">    
-        <div class="tituloImagen"><h3>Examen</h3></div>
-        <div class="linkImagen"><button class="botonInfo" (click)="irAAlumnos()">+ INFO</button></div>        
-    </div>
-
-    
-</main>
-
+        <div class="tituloImagen"><h3>Cursos</h3></div>
+        <div class="linkImagen"><button class="botonInfo" (click)="irACursos()">+ INFO</button></div>        
+    </div> -->
 
 <!-- <a class="link-navbar" [routerLink]="['/login']">Desloguearse</a></h5> -->

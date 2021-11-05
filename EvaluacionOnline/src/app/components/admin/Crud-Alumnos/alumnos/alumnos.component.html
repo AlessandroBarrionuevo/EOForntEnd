@@ -1,0 +1,63 @@
+<!-- id rol 2 -->
+<body class="body-table" *ngIf="usuario.idRol == 2">  
+
+  <div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 2">
+    <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/home']">Home</a></h5>
+    <h5 class="titulo-navbar"><a class="link-navbar" [routerLink]="['/alumnos', usuario.id]">Alumnos</a></h5>
+    <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
+  </div>
+
+  <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">Matricula</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">IdUsuario</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let alumno of lista">
+      <tr>
+        <th scope="row">{{alumno.matricula}}</th>
+        <td>{{alumno.nombre}}</td>
+        <td>{{alumno.apellido}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+
+<!-- id rol 1 -->
+<body  *ngIf="usuario.idRol == 1">
+  <div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 1">
+    <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+    <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', usuario.id]">Alumnos</a></h5>
+    <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Profesores</a></h5>
+    <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
+  </div>
+
+  <div class="nuevoAlumno">
+    <h3>Crear nuevo alumno</h3>
+    <span ><button type="button" class="btn btn-success" (click)="crearUnAlumno()"><i class="bi bi-person-plus"></i></button></span>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Eliminar</th>
+        <th scope="col">Modificar</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let alumno of lista">
+      <tr>
+        <td><a [routerLink]="['/alumno-detail', alumno.id, usuario.id ]" class="linkName">{{alumno.nombre}}</a></td>
+        <td>{{alumno.apellido}}</td>
+        <td><button type="button" class="btn btn-danger" (click)="popUpBorrar(alumno.id, alumno.nombre)"><i class="bi bi-person-x"></i></button></td>
+        <td><button type="button" class="btn btn-primary" (click)="modificar(alumno.id)"><i class="bi bi-upload"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>

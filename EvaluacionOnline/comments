@@ -101,3 +101,90 @@
   //   }, error => console.log(error))
   // }
 //Login(loginForm.value.nickName, loginForm.value.password)
+//package.jkson
+//     "@angular/animations": "^11.2.14",
+//     "@angular/cdk": "^11.2.13",
+//     "@angular/common": "~11.2.7",
+//     "@angular/compiler": "~11.2.7",
+//     "@angular/core": "~11.2.7",
+//     "@angular/forms": "~11.2.7",
+//     "@angular/localize": "~11.2.7",
+//     "@angular/material": "^11.2.13",
+//     "@angular/platform-browser": "~11.2.7",
+//     "@angular/platform-browser-dynamic": "~11.2.7",
+//     "@angular/router": "~11.2.7",
+// >>>>>>> bf6185a0a015fa87d517bebe9a1aa02067a5f24d
+
+
+//alumno que hereda de persona put
+// tomarDatosParaModificarAlumno(alumno: FormGroup, id: number) {
+//   let alumnoAUpdatear = new Alumno(
+//     alumno.value.nombre,
+//     alumno.value.apellido,
+//     alumno.value.dni,
+//     alumno.value.mail,
+//     alumno.value.direccion,
+//     alumno.value.telefono
+//   );
+//   alumnoAUpdatear.id = this.alumno.id;
+//   alumnoAUpdatear.dni = this.alumno.dni;
+//   alumnoAUpdatear.userName = this.alumno.userName;
+//   alumnoAUpdatear.normalizedUserName = this.alumno.normalizedUserName;
+
+//   this.alumnosService.modificarAlumnoHttp(alumnoAUpdatear).subscribe((r) => {
+//     console.log(r);
+//   });
+
+//   //this.router.navigate(['alumnos', this.usuarioId]);
+// }
+
+//fecha inicio y fin form cursos
+// <!-- <div class="form-group">
+//           <input
+//             type="text"
+//             minlength="3"
+//             maxlength="13"
+//             class="form-control"
+//             placeholder="Fecha inicio del curso"
+//             formControlName="fechaInicio"
+//           />
+//           <div
+//             *ngIf="
+//               crearCursoForm.controls['fechaInicio'].invalid &&
+//               (crearCursoForm.controls['fechaInicio'].dirty ||
+//                 crearCursoForm.controls['fechaInicio'].touched)
+//             "
+//           >
+//             <div
+//               *ngIf="crearCursoForm.controls['fechaInicio'].errors.required"
+//               class="errors"
+//             >
+//               Se requiere fecha de inicio
+//             </div>
+//           </div>
+//         </div> -->
+//         <!-- <div class="form-group">
+//           <input
+//             type="text"
+//             minlength="3"
+//             maxlength="20"
+//             class="form-control"
+//             placeholder="Fecha de fin del curso"
+//             formControlName="fechaFin"
+//           />
+//           <div
+//             *ngIf="
+//               crearCursoForm.controls['fechaFin'].invalid &&
+//               (crearCursoForm.controls['fechaFin'].dirty ||
+//                 crearCursoForm.controls['fechaFin'].touched)
+//             "
+//           >
+//             <div
+//               *ngIf="crearCursoForm.controls['fechaFin'].errors.required"
+//               class="errors"
+//             >
+//               Se requiere el fecha de Fin
+//             </div>
+//           </div>
+//         </div> -->
+  

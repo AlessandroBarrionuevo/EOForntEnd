@@ -1,37 +1,84 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
-import { MsalService } from '@azure/msal-angular';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from '../components/home/home.component';
+import { UsersService } from '../services/users.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any',
 })
 export class GuardGuard implements CanActivate {
-  constructor(private router: Router, private loginService: SocialAuthService) { }
+  constructor(
+    private router: Router,
+    private loginService: SocialAuthService,
+    private user: UsersService,
+    private activatedRoute: ActivatedRoute
+  ) { }
+  
+  rol: string;
+  asd: string = 'sad';
+ 
+  // usuariobyID(usuario: any) {
+  //   this.user.usuarioPorId(usuario).subscribe(
+  //     (r) => {
+  //       this.rol = r.rol;
+  //       console.log(this.rol);
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 
   canActivate(
-    
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-     
-    // if (this.msalService.instance.getActiveAccount() == null) {
-    //   return false;
-    // }
-  
-    if (localStorage.getItem("APP_TOKEN") != null) {
-      
-      return true;
-    }
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     
-    this.router.navigate(['login'])  
-    // if (this._authService.isUserAuthenticated()) {
+    return this.usuariobyID(localStorage.getItem('ID'))
+
+    // if (!this.user.usuariobyID(localStorage.getItem('ID'))) {
+    //   console.log('err');
+    //   console.log(this.user.usuariobyID(localStorage.getItem('ID')));
+    //   console.log(localStorage.getItem('ID'));
+    //   this.router.navigate(['login']);
+    //   return false;
+    // } else {
+    //   console.log(localStorage.getItem('ID'));
+    //   console.log('paso');
     //   return true;
     // }
-
-    return false;
   }
-  
+
+  usuariobyID(usuario: any): boolean {
+    let bool = false
+    this.user.usuarioPorId(usuario).subscribe(
+      (r) => {
+        if (r.rol == 'Admin') { 
+          console.log('paso');
+          bool = true
+          return bool;
+        }
+      },
+      (err) => {
+        return bool;
+      }
+    );
+
+    return bool
+  }
+
+  //hay algo con el scope que me esta tirando undefined
 }

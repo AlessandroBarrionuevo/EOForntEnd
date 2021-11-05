@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -33,14 +34,34 @@ export class UsersService {
     return usuarioEncontrado;
   }
 
-  registrarUsuario(alumno: any) {
-    return this.http.post('/api/Register', alumno);
+  registrarUsuario(usuario: any) {
+    return this.http.post('/api/Admin/Register', usuario);
   }
 
-  LoginUsuario(alumno: any) {
-    return this.http.post('/api/Login', alumno);
+  registrarAlumno(alumno: any) {
+    return this.http.post('/api/User', alumno);
   }
 
+  LoginUsuario(usuario: any) {
+    return this.http.post('/api/Login', usuario);
+  }
+
+  usuarioPorId(usuario: any): Observable<any> { 
+    return this.http.get<any>(`/api/User/${usuario}`);
+  }
   
-  
+  usuariobyID(usuario: any): boolean {
+    this.usuarioPorId(usuario).subscribe(
+      (r) => {
+        if (r.rol == null) { 
+          return true;
+        }
+      },
+      (err) => {
+        return false;
+      }
+    );
+    return false
+  }
+
 }

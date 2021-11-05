@@ -110,7 +110,7 @@ html {
 .linkImagen{
     text-decoration: none;
     margin-top: 1rem;
-    
+
 }
 
 .btnLink{
@@ -130,7 +130,7 @@ html {
     border: none;
     color: black;
     padding: 0.5rem 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     font-weight: 700;
 }
 
@@ -141,9 +141,136 @@ html {
     justify-content: space-evenly;
     font-weight: 700;
     font-size: 1.2rem;
+    align-items: center;
 }
 
 .btnlog{
     color: white;
     border: white 1px solid;
 }
+
+.img-profile{
+    max-width: 3rem;
+    border-radius: 2rem;
+}
+
+.btnlog{
+    margin: 0;
+}
+
+.boton{
+    margin-top: 1rem;
+    display: inline-flex;
+    width: 100%;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .3s ease all;
+    position: relative;
+   overflow: hidden;
+}
+
+.boton.alumno::after{
+    content:"";
+    width: 130%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: calc(-100% - 80px);
+    border-bottom: 80px solid black;
+    border-right: 60px solid transparent;
+    transition: .4s ease-in-out all;
+}
+
+.boton.alumno:hover::after{
+    left: 0;
+}
+
+.boton span{
+    position: relative;
+    z-index: 2;
+    transition: .3s ease all;
+}
+
+/*Cards animadas*/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/*Cards*/
+.container-card{
+	width: 100%;
+	display: flex;
+	max-width: 1100px;
+	margin: auto;
+}
+.title-cards{
+	width: 100%;
+	max-width: 1080px;
+	margin: auto;
+	padding: 20px;
+	margin-top: 20px;
+	text-align: center;
+	color: #7a7a7a;
+}
+.card{
+	width: 100%;
+	margin: 20px;
+	border-radius: 6px;
+	overflow: hidden;
+	background:#fff;
+	box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+	transition: all 400ms ease-out;
+	cursor: default;
+}
+.card:hover{
+	box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+	transform: translateY(-3%);
+}
+.card img{
+	width: 100%;
+	height: 10rem;
+}
+.card .contenido-card{
+	padding: 1rem;
+	text-align: center;
+}
+.card .contenido-card h3{
+	margin-bottom: 15px;
+	color: #7a7a7a;
+}
+.card .contenido-card p{
+    
+	line-height: 1.8;
+	color: #6a6a6a;
+	font-size: 14px;
+
+}
+.card .contenido-card a{
+	display: inline-block;
+	padding: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+	color: #2fb4cc;
+	border: 1px solid #2fb4cc;
+	border-radius: 4px;
+	transition: all 400ms ease;
+	margin-bottom: 5px;
+}
+
+@media only screen and (min-width:320px) and (max-width:768px){
+	.container-card{
+		flex-wrap: wrap;
+	}
+	.card{
+		margin: 15px;
+	}
+}
+/*Fin-Cards*/

@@ -1,0 +1,161 @@
+<div style="text-align: center" class="barra">
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a>
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']"
+      >Alumnos</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']"
+      >Profesores</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']"
+      >Desloguearse</a
+    >
+  </h5>
+</div>
+
+<div class="col-6 container">
+  <div class="border-login">
+    <div>
+      <h2 class="titulo-login">Crear Examen</h2>
+    </div>
+    <form [formGroup]="examen" (submit)="crearExamen(examen)" class="loginForm">
+      <div class="form-group">
+        <label class="label">Nombre</label>
+        <input
+          type="text"
+          minlength="3"
+          maxlength="30"
+          class="form-control"
+          formControlName="nombre"
+        />
+        <div
+          *ngIf="
+            examen.controls['nombre'].invalid &&
+            (examen.controls['nombre'].dirty ||
+              examen.controls['nombre'].touched)
+          "
+        >
+          <div *ngIf="examen.controls['nombre'].errors.required" class="errors">
+            Se requiere el nombre
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label">estado</label>
+        <input
+          type="text"
+          minlength="3"
+          maxlength="40"
+          required
+          class="form-control"
+          formControlName="estado"
+        />
+        <div
+          *ngIf="
+            examen.controls['estado'].invalid &&
+            (examen.controls['estado'].dirty ||
+              examen.controls['estado'].touched)
+          "
+        >
+          <div
+            *ngIf="
+              examen.controls['estado'].errors.pattern ||
+              examen.controls['estado'].errors.required
+            "
+            class="errors"
+          >
+            Por favor ingrese una estado
+          </div>
+        </div>
+      </div>
+
+      <div class="p-field p-col-12 p-md-4 datepicker">
+        <label for="icon">Fecha</label>
+        <p-calendar
+          formControlName="fecha"
+          [showIcon]="true"
+          inputId="icon"
+        ></p-calendar>
+        <div
+          *ngIf="
+            examen.controls['fecha'].invalid &&
+            (examen.controls['fecha'].dirty || examen.controls['fecha'].touched)
+          "
+        >
+          <div *ngIf="examen.controls['fecha'].errors.required" class="errors">
+            Se requiere fecha
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">duracion</label>
+        <input
+          type="number"
+          minlength="3"
+          maxlength="40"
+          required
+          class="form-control"
+          formControlName="duracion"
+        />
+        <div
+          *ngIf="
+            examen.controls['duracion'].invalid &&
+            (examen.controls['duracion'].dirty ||
+              examen.controls['duracion'].touched)
+          "
+        >
+          <div
+            *ngIf="
+              examen.controls['duracion'].errors.pattern ||
+              examen.controls['duracion'].errors.required
+            "
+            class="errors"
+          >
+            Por favor ingrese una duracion
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">curso</label>
+        <input
+          type="number"
+          minlength="3"
+          maxlength="40"
+          required
+          class="form-control"
+          formControlName="curso"
+        />
+        <div
+          *ngIf="
+            examen.controls['curso'].invalid &&
+            (examen.controls['curso'].dirty || examen.controls['curso'].touched)
+          "
+        >
+          <div
+            *ngIf="
+              examen.controls['curso'].errors.pattern ||
+              examen.controls['curso'].errors.required
+            "
+            class="errors"
+          >
+            Por favor ingrese una curso
+          </div>
+        </div>
+      </div>
+
+      <div class="align-center">
+        <button class="btn btn-success" type="submit" *ngIf="!examen.invalid">
+          Crear Un nuevo examen
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

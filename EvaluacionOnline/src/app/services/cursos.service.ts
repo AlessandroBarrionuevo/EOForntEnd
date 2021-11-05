@@ -100,4 +100,25 @@ export class CursosService {
 
         //return this.http.delete<ICurso>(this._apiURL + '/' + cursoId)
     }
+
+    //cursos por ale
+    obtenerTodosLosCursos():Observable<any> { 
+        return this.http.get<any>(this._apiURL)
+    }
+
+    obtenerCursoPorId(id: number):Observable<any>{  
+        return this.http.get<any>(`${this._apiURL}/${id}`)
+    }
+
+    crearCurso(curso: any) { 
+        return this.http.post(this._apiURL, curso)
+    }
+
+    modificarCurso(curso: any) { 
+        return this.http.put(this._apiURL, curso);
+    }
+
+    borrarCurso(id: number) { 
+        return this.http.delete(`${this._apiURL}/${id}`)
+    }
 }

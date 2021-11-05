@@ -1,0 +1,143 @@
+<div style="text-align: center" class="barra">
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a>
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', 1]"
+      >Alumnos</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']"
+      >Profesores</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']"
+      >Desloguearse</a
+    >
+  </h5>
+</div>
+
+<div class="col-6 container">
+  <div class="border-login">
+    <div>
+      <h2 class="titulo-login">Modificar Curso</h2>
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="idCurso"
+        readonly="true"
+      />
+    </div>
+
+    <form
+      [formGroup]="cursoForm"
+      (submit)="modificar(cursoForm)"
+      class="loginForm"
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          minlength="3"
+          maxlength="13"
+          placeholder="{{ curso.nombre }}"
+          formControlName="nombre"
+        />
+
+        <div
+          *ngIf="
+            cursoForm.controls['nombre'].invalid &&
+            (cursoForm.controls['nombre'].dirty ||
+              cursoForm.controls['nombre'].touched)
+          "
+        >
+          <div
+            *ngIf="cursoForm.controls['nombre'].errors.required"
+            class="errors"
+          >
+            Se requiere el nombre
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          minlength="3"
+          maxlength="13"
+          placeholder="{{ curso.descripcion }}"
+          formControlName="descripcion"
+        />
+
+        <div
+          *ngIf="
+            cursoForm.controls['descripcion'].invalid &&
+            (cursoForm.controls['descripcion'].dirty ||
+              cursoForm.controls['descripcion'].touched)
+          "
+        >
+          <div
+            *ngIf="cursoForm.controls['descripcion'].errors.required"
+            class="errors"
+          >
+            Se requiere el descripcion
+          </div>
+        </div>
+      </div>
+
+      <div class="p-field p-col-12 p-md-4 datepicker">
+        <label for="icon">Fecha inicio</label>
+        <p-calendar formControlName="fechaInicio" [showIcon]="true" inputId="icon"></p-calendar>
+        <div
+          *ngIf="
+            cursoForm.controls['fechaInicio'].invalid &&
+            (cursoForm.controls['fechaInicio'].dirty ||
+              cursoForm.controls['fechaInicio'].touched)
+          "
+        >
+          <div
+            *ngIf="cursoForm.controls['fechaInicio'].errors.required"
+            class="errors"
+          >
+            Se requiere fecha de inicio
+          </div>
+        </div>
+      </div>
+
+      <div class="p-field p-col-12 p-md-4 datepicker">
+        <label for="icon">Fecha de Fin</label>
+        <p-calendar formControlName="fechaFin" [showIcon]="true" inputId="icon" class="calendar"></p-calendar>
+
+        <div
+          *ngIf="
+            cursoForm.controls['fechaFin'].invalid &&
+            (cursoForm.controls['fechaFin'].dirty ||
+              cursoForm.controls['fechaFin'].touched)
+          "
+        >
+          <div
+            *ngIf="cursoForm.controls['fechaFin'].errors.required"
+            class="errors"
+          >
+            Se requiere fecha de Fin
+          </div>
+        </div>
+      </div>
+
+      <div class="align-center">
+        <button
+          class="btn botonActualizar"
+          type="submit"
+          *ngIf="!cursoForm.invalid"
+          (click)="modificar(cursoForm)"
+        >
+          Modificar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

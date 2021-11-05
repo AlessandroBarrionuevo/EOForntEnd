@@ -1,0 +1,35 @@
+<div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 1">
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos', usuario.id]">Alumnos</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Profesores</a></h5>
+  <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
+</div>
+
+<div class="card contenedor-card" style="width: 18rem;">
+    <!-- <img class="card-img-top" src="{{objRecibido?.image}}" alt="Imagen personaje"> -->
+    <div class="card-body ">
+        <h5 class="card-title">{{alumno?.nombre}}</h5>
+        <p class="card-text">{{alumno?.apellido}}</p>
+        <p class="card-text">{{alumno?.mail}}</p>
+    </div>
+    
+</div>
+
+<!-- <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nombre Curso</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">FechaInicio</th>
+        <th scope="col">FechaFin</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let curso of alumno.listaCursos">
+      <tr>
+        <td>{{curso.nombre}}</td>
+        <td>{{curso.descripcion}}</td>
+        <td>{{curso.fechaInicio}}</td>
+        <td>{{curso.fechaFin}}</td>
+      </tr>
+    </tbody>
+</table>  -->

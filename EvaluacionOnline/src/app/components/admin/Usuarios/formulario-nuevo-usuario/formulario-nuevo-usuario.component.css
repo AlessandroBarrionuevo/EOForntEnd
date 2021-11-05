@@ -1,0 +1,4 @@
+.boton.alumno::after{
+    border-bottom: 80px solid grey;
+    color: black;
+}

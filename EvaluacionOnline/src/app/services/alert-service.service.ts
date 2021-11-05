@@ -11,7 +11,6 @@ export class AlertServiceService {
 
   toastError(mensaje:any){
     this.toast.error(mensaje, 'ERROR');
-
   }
 
   toastSucces(mensaje: any) {
@@ -22,7 +21,7 @@ export class AlertServiceService {
     this.toast.warning(mensaje, 'Peligro');
   }
 
-  animacion(titulo: string) {
+  animacionSucces(titulo: string) {
     Swal.fire({
       icon: 'success',
       title: titulo,

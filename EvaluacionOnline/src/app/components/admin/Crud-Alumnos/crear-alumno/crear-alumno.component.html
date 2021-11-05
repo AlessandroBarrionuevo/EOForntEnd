@@ -1,0 +1,143 @@
+<div style="text-align: center" class="barra">
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a>
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']"
+      >Alumnos</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']"
+      >Profesores</a
+    >
+  </h5>
+  <h5 class="titulo-navbar">
+    <a class="btn btn-outline-info btnlog" [routerLink]="['/home']"
+      >Desloguearse</a
+    >
+  </h5>
+</div>
+
+<div class="col-6 container">
+  <div class="border-login">
+    <div>
+      <h2 class="titulo-login">Crear alumno</h2>
+    </div>
+    <form
+      [formGroup]="crearAlumnoForm"
+      (submit)="crearAlumno(crearAlumnoForm)"
+      class="loginForm"
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          minlength="3"
+          maxlength="16"
+          class="form-control"
+          placeholder="userName"
+          formControlName="userName"
+        />
+        <div
+          *ngIf="
+            crearAlumnoForm.controls['userName'].invalid &&
+            (crearAlumnoForm.controls['userName'].dirty ||
+              crearAlumnoForm.controls['userName'].touched)
+          "
+        >
+          <div
+            *ngIf="crearAlumnoForm.controls['userName'].errors.required"
+            class="errors"
+          >
+            Se requiere el userName
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          minlength="3"
+          maxlength="40"
+          required
+          class="form-control"
+          placeholder="mail"
+          formControlName="mail"
+        />
+        <div
+          *ngIf="
+            crearAlumnoForm.controls['mail'].invalid &&
+            (crearAlumnoForm.controls['mail'].dirty ||
+              crearAlumnoForm.controls['mail'].touched)
+          "
+        >
+          <div
+            *ngIf="crearAlumnoForm.controls['mail'].errors.pattern || crearAlumnoForm.controls['userName'].errors.required"
+            class="errors"
+          >
+            Por favor ingrese un correo electronico
+          </div>          
+        </div>
+        
+        
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          minlength="3"
+          maxlength="13"
+          class="form-control"
+          placeholder="nombre"
+          formControlName="nombre"
+        />
+        <div
+          *ngIf="
+            crearAlumnoForm.controls['nombre'].invalid &&
+            (crearAlumnoForm.controls['nombre'].dirty ||
+              crearAlumnoForm.controls['nombre'].touched)
+          "
+        >
+          <div
+            *ngIf="crearAlumnoForm.controls['nombre'].errors.required"
+            class="errors"
+          >
+            Se requiere el nombre
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          minlength="3"
+          maxlength="20"
+          class="form-control"
+          placeholder="apellido"
+          formControlName="apellido"
+        />
+        <div
+          *ngIf="
+            crearAlumnoForm.controls['apellido'].invalid &&
+            (crearAlumnoForm.controls['apellido'].dirty ||
+              crearAlumnoForm.controls['apellido'].touched)
+          "
+        >
+          <div
+            *ngIf="crearAlumnoForm.controls['apellido'].errors.required"
+            class="errors"
+          >
+            Se requiere el apellido
+          </div>
+        </div>
+      </div>
+
+      <div class="align-center">
+        <button
+          class="btn btn-success"
+          type="submit"
+          *ngIf="!crearAlumnoForm.invalid"
+        >
+          Incorporar Alumno
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
