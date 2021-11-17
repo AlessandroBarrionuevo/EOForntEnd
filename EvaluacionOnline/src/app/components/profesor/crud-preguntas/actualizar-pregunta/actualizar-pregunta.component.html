@@ -1,0 +1,46 @@
+<div>
+    <div style="text-align: center;" class="barra">
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Alumnos</a></h5>
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/profesores']">Profesores</a></h5>
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
+    </div>
+
+    <div class="col-6 container">
+        <div class="border-login">
+            <div>
+                <h2 class="titulo-login">Modificar Pregunta</h2>
+            </div>
+            <form [formGroup]="preguntaModificar" (submit)="modificarPregunta()" class="loginForm">
+                <div class="form-group">
+                    <label class="label">Descripcion</label>
+                    <input type="text" minlength="3" maxlength="30" class="form-control" formControlName="descripcion" />
+                    <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                        <div *ngIf="descripcion.errors.required" class="errors">
+                            Se requiere la descripcion
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label">Puntaje</label>
+                    <input type="number" required class="form-control" formControlName="puntaje" />
+                    <div *ngIf="puntaje.invalid && (puntaje.dirty || puntaje.touched)">
+                        <div *ngIf="puntaje.errors.pattern || puntaje.errors.required" class="errors">
+                            Por favor ingrese un puntaje
+                        </div>
+                        <div *ngIf="puntaje.errors.min" class="errors">
+                            Puntaje minimo es 1
+                        </div>
+                    </div>
+                </div>
+
+                <div class="align-center">
+                    <button class="btn btn-success" type="submit" [disabled]="isInvalid || _requestingApi" >
+                        Modificar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

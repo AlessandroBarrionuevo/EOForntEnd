@@ -1,0 +1,64 @@
+<div style="text-align: center" class="barra">
+    <h5 class="titulo-navbar">
+        <a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a>
+    </h5>
+    <h5 class="titulo-navbar">
+        <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Alumnos</a>
+    </h5>
+    <h5 class="titulo-navbar">
+        <a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Profesores</a>
+    </h5>
+    <h5 class="titulo-navbar">
+        <a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a>
+    </h5>
+</div>
+
+<div class="col-6 container">
+    <div class="border-login">
+        <div>
+            <h2 class="titulo-login">Modificar usuario</h2>
+        </div>
+        <form [formGroup]="modificarUsuario" (submit)="modificarUser()" class="loginForm">
+
+            <!--
+            <div class="form-group">
+                <input type="text" minlength="3" maxlength="16" class="form-control" placeholder="Nombre" formControlName="nombre" />
+                <div *ngIf=" nombre.invalid && (nombre.dirty || nombre.touched)">
+                    <div *ngIf="nombre.errors.required" class="errors">
+                        Se requiere el nombre
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" minlength="3" maxlength="20" class="form-control" placeholder="Apellido" formControlName="apellido" />
+                <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                    <div *ngIf="apellido.errors.required" class="errors">
+                        Se requiere el apellido
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="email" minlength="3" maxlength="40" required class="form-control" placeholder="Email" formControlName="email" />
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.errors.pattern || email.errors.required" class="errors">
+                        Por favor ingrese un correo electronico
+                    </div>
+                </div>
+            </div>
+            -->
+            <div class="form-group">
+                <select formControlName="rol">
+                    <option *ngFor="let rol of _roles" [value]="rol">{{ rol }}</option>
+                </select>
+            </div>
+
+            <div class="align-center">
+                <button class="botonActualizar boton alumno" type="submit" [disabled]="modificarUsuario.invalid || _requestingApi">
+                    <span> Modificar Usuario </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

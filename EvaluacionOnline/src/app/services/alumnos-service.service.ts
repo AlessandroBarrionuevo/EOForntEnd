@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Alumno } from '../models/alumno';
-import { ICurso } from '../models/curso';
-import { Usuario } from '../models/usuario';
 
 import { EstadoHelper } from '../helpers/EstadosHelper';
 
@@ -11,6 +8,7 @@ import { EstadoHelper } from '../helpers/EstadosHelper';
   providedIn: 'root'
 })
 export class AlumnosServiceService {
+<<<<<<< Updated upstream
   private _cursos: ICurso[] = [
     {
         id: 1,
@@ -73,6 +71,11 @@ export class AlumnosServiceService {
     })
   }
 
+=======
+  constructor(private htppClient: HttpClient) { }
+
+  //api
+>>>>>>> Stashed changes
   obtenerAlumnoPorId(id: number) {
     return this.htppClient.get<any>('/api/Alumno/' + id);
   }

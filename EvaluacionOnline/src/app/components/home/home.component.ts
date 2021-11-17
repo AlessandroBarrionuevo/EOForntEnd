@@ -13,12 +13,28 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+<<<<<<< Updated upstream
   usuario: Usuario;
   datos: string = null;
   
   constructor(private route: ActivatedRoute, public auth: MsalService,
     private user: UsersService, private msalService: MsalService,
     private router: Router) { }//this.id = route.snapshot.params['id']; }
+=======
+  usuario: any;
+  socialUser: SocialUser;
+  isLoggedin: boolean = false;
+  items: MenuItem[];
+  rol: string;
+  
+  constructor(
+    private route: ActivatedRoute,
+    private user: UsersService,
+    private router: Router,
+    private _authService: AuthenticationService,
+    private socialAuthService: SocialAuthService
+  ) {}
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
     let a = this.auth.instance.getActiveAccount();

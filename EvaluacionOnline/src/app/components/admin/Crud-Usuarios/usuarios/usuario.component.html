@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+
+<div>
+    <div class="nuevoAlumno">
+        <h3>Crear Usuario</h3>
+        <span>
+            <button type="button" class="btn btn-success" (click)="crearUsuario()" [disabled]="_requestingApi">
+                <i class="bi bi-person-plus"></i>
+            </button>
+        </span>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Rol</th>
+
+                <th scope="col">Eliminar</th>
+                <th scope="col">Modificar</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let user of _usuarios">
+            <tr>
+                <td>{{user.nombre}}</td>
+                <td>{{user.apellido}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.rol}}</td>
+
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="eliminarUsuario(user.id)" [disabled]="_requestingApi">
+                        <i class="bi bi-person-x"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="modificarUsuario(user.id)" [disabled]="_requestingApi">
+                        <i class="bi bi-upload"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -64,8 +64,19 @@ export class LoginComponent implements OnInit {
     )
   }
 
+<<<<<<< Updated upstream
   isLoggedIn(): boolean {
     return this.msalService.instance.getActiveAccount() != null;
+=======
+  private validateExternalAuth(externalAuth: ExternalAuthDto) {
+    this._authService.externalLogin(externalAuth)
+      .subscribe(res => {
+        localStorage.setItem("token", res.authToken);
+      },
+      error => {
+        this._authService.signOutExternal();
+      });
+>>>>>>> Stashed changes
   }
 
   logout() {

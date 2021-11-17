@@ -1,0 +1,63 @@
+<!-- hasta aca navbar -->
+
+<div class="hero">
+  <div class="contenedor-hero"></div>
+</div>
+
+<div class="cartelHero">
+  <p class="text-cartel-hero">Seccion profesores</p>
+</div>
+
+<main class="servicios contenedor">
+
+  <div class="container-card">
+
+    <div class="card">
+      <figure>
+        <img src="../../../../assets/img/Examen-virtual.jpg" />
+      </figure>
+      <div class="contenido-card">
+        <h3>Examenes</h3>
+        <div>
+          <p>Crear, modificar y ver sus examenes</p>
+        </div>
+        <button class="botonInfo boton alumno" (click)="irExamenes()">
+          <span>IR</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <figure>
+        <img src="../../../../assets/img/preguntas.avif">
+      </figure>
+      <div class="contenido-card">
+        <h3>Preguntas</h3>
+        <div>
+          <p>Crear, modificar y ver preguntas</p>
+        </div>
+        <button class="botonInfo boton alumno" (click)="irPreguntas()">
+          <span>IR</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <figure>
+        <img src="../../../../assets/img/academias.jfif" />
+      </figure>
+      <div class="contenido-card">
+        <h3>Materias</h3>
+        <div>
+          <p>Aca encontrara los materias que dicta</p>
+        </div>
+        <div class="linkImagen">
+          <button class="botonInfo boton alumno" (click)="irACursos()">
+            <span>IR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>

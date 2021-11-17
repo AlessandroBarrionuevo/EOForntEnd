@@ -21,16 +21,25 @@ export class AlumnosComponent implements OnInit {
   usuario: Usuario;
   respuesta: any;
   
-  constructor(private alumnosService: AlumnosServiceService, private route: ActivatedRoute,
-    private userService: UsersService, private router: Router,
+  constructor(
+    private alumnosService: AlumnosServiceService,
+    private route: ActivatedRoute,
+    private userService: UsersService,
+    private router: Router,
     private alert: AlertServiceService) {
     this.id = route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-   // this.lista = this.alumnosService.obtenerListadoAlumnos();
     this.alert.toastWarning('Esta seccion maneja datos sensibles')
-    this.usuario = this.userService.BuscarUsuarioEnListaPorId(this.id);
+    this.userService.usuarioPorId(this.id).subscribe(
+      data =>{
+        this.usuario = data;
+      },
+      error =>{
+        console.log(error);
+      }
+    )
     this.listadoAlumnos();
   }
 

@@ -1,0 +1,135 @@
+<div>
+    <div style="text-align: center;" class="barra">
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Home</a></h5>
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/alumnos']">Alumnos</a></h5>
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/profesores']">Profesores</a></h5>
+        <h5 class="titulo-navbar"><a class="btn btn-outline-info btnlog" [routerLink]="['/home']">Desloguearse</a></h5>
+    </div>
+
+    <div class="col-6 container">
+        <div class="border-login">
+            <div>
+                <h2 class="titulo-login">Crear Pregunta</h2>
+            </div>
+            <form [formGroup]="pregunta" (submit)="crearPregunta()" class="loginForm">
+                <div class="form-group">
+                    <label class="label">Descripcion</label>
+                    <input type="text" minlength="3" maxlength="30" class="form-control" formControlName="descripcion" />
+                    <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                        <div *ngIf="descripcion.errors.required" class="errors">
+                            Se requiere la descripcion
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label">Puntaje</label>
+                    <input type="number" required class="form-control" formControlName="puntaje" />
+                    <div *ngIf="puntaje.invalid && (puntaje.dirty || puntaje.touched)">
+                        <div *ngIf="puntaje.errors.pattern || puntaje.errors.required" class="errors">
+                            Por favor ingrese un puntaje
+                        </div>
+                        <div *ngIf="puntaje.errors.min" class="errors">
+                            Puntaje minimo es 1
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                <div class="form-group">
+                    <label class="label">Valor</label>
+                    <input type="number" required class="form-control" formControlName="valor" />
+                    <div *ngIf="valor.invalid && (valor.dirty || valor.touched)">
+                        <div *ngIf="valor.errors.required" class="errors">
+                            Se requiere valor
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <!--
+                <div class="form-group">
+                    <label class="label">Tipo de pregunta</label>
+                    <select class="form-control" formControlName="discriminador">
+                        <option *ngFor="let tipoPregunta of _tipoPreguntas" [value]="tipoPregunta">
+                            {{tipoPregunta}}
+                        </option>
+                    </select>
+                </div>
+                -->
+
+                <div class="form-group">
+                    <label class="label">Examen</label>
+                    <select class="form-control" formControlName="examen">
+                        <option *ngFor="let examen of _examenes" [value]="examen.id">{{examen.nombre}}</option>
+                    </select>
+                </div>
+
+                <!--
+                <div class="form-group" *ngIf="discriminador.value == multipleChoiceUnaRespuesta || discriminador.value == multipleChoiceVariasRespuesta">
+                    <label class="label">Respuesta</label>
+                    <div class="input-group">
+                        <button class="btn btn-secondary" type="button" (click)="agregarRespuesta()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+                            </svg>
+                        </button>
+
+                        <input type="text" minlength="3" maxlength="40" required class="form-control" formControlName="preguntaChoice"/>
+                    
+                        <div class="input-group-text">
+                            <input type="checkbox" formControlName="esRespuesta">
+                        </div>
+                    </div>
+
+                    <div *ngIf="preguntaChoice.invalid && (preguntaChoice.dirty || preguntaChoice.touched)">
+                        <div *ngIf="preguntaChoice.errors.required" class="errors">
+                            Se requiere pregunta
+                        </div>
+                    </div>
+                </div>
+
+                <div [ngSwitch]="discriminador.value">
+                    <div *ngSwitchCase="multipleChoiceUnaRespuesta">
+                        <div    *ngFor="let p of _multipleChoiceUnaRespuesta; let i = index"
+                                [ngClass]="p.esRespuesta
+                                ? 'list-group-item list-group-item-action active' 
+                                : 'list-group-item list-group-item-action'"
+                                (click)="onClickMultipleChoiceUnaRespuestaItem(i)">
+
+                                <button type="button" class="btn btn-danger" (click)="onDeleteMultipleChoiceUnaRespuestaItem(i)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            {{p.respuesta}}
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    
+                    <div *ngSwitchCase="multipleChoiceVariasRespuesta">
+                        <div
+                            *ngFor="let p of _multipleChoiceVariasRespuesta; let i = index"
+                            [ngClass]="p.esRespuesta
+                            ? 'list-group-item list-group-item-action active' 
+                            : 'list-group-item list-group-item-action'"
+                            (click)="onClickMultipleChoiceVariasRespuestaItem(i)">
+
+                            <button type="button" class="btn btn-danger" (click)="onDeleteMultipleChoiceVariasRespuestaItem(i)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        {{p.respuesta}}
+                        </div>
+                        <br/>
+                    </div>
+
+                </div>
+                -->
+
+                <div class="align-center">
+                    <button class="btn btn-success" type="submit" [disabled]="isInvalid || _requestingApi" >
+                        Crear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

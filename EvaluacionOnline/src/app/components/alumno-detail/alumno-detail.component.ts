@@ -23,9 +23,29 @@ export class AlumnoDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.alumno = this.alumnosService.obtenerAlumnoPorId(this.id).subscribe(
+<<<<<<< Updated upstream:EvaluacionOnline/src/app/components/alumno-detail/alumno-detail.component.ts
       (r) => { this.alumno = r}
     )
     this.usuario = this.usuarioService.BuscarUsuarioEnListaPorId(this.usuarioId);
+=======
+      (r) => {
+        this.alumno = r;
+      },
+      (err) => {
+        this.alert.toastError('Error al obtener los datos del alumno');
+      }
+    );
+
+    this.usuarioService.usuarioPorId(this.usuarioId).subscribe(
+      data =>{
+        this.usuario = data;
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+    
+>>>>>>> Stashed changes:EvaluacionOnline/src/app/components/admin/Crud-Alumnos/alumno-detail/alumno-detail.component.ts
   }
 
 }

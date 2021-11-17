@@ -1,9 +1,50 @@
+<<<<<<< Updated upstream
 <nav class="navbar navbar-light"  class="navbarHome">
     <a href="#" class="btn btn-outline-info btnlog">Contacto</a>
     <a href="#" class="btn btn-outline-info btnlog">Sobre nosotros</a>
     <button class="btn btn-outline-info btnlog" (click)="logout()" *ngIf="isLoggedIn()">Desloguearse</button>
     <button class="btn btn-outline-info btnlog" (click)="login()" *ngIf="!isLoggedIn()">Loggearse</button>
+=======
+<app-navbar></app-navbar>
+
+<!-- 
+<nav class="navbar navbar-light" class="navbarHome">
+  <img
+    class="img-profile"
+    src="{{ socialUser.photoUrl }}"
+    alt=""
+    *ngIf="socialUser != null"
+  />
+  <p class="btn btn-outline-info btnlog" *ngIf="usuario != null">
+    {{ usuario.nombre }}
+  </p>
+
+  <a href="#" class="btn btn-outline-info btnlog">Contacto</a>
+  <a href="#" class="btn btn-outline-info btnlog">Sobre nosotros</a>
+  <button
+    class="btn btn-outline-info btnlog"
+    (click)="logout()"
+    *ngIf="socialUser != null"
+  >
+    Desloguearse
+  </button>
+  <button
+    class="btn btn-outline-info btnlog"
+    (click)="externalLogin()"
+    *ngIf="socialUser == null"
+  >
+    Loggearse
+  </button>
+  <button
+    class="btn btn-outline-info btnlog"
+    (click)="registrarUsuario()"
+    *ngIf="socialUser == null"
+  >
+    Registrarse
+  </button>
+>>>>>>> Stashed changes
 </nav>
+-->
 
 <div  style="text-align: center;" class="barra" *ngIf="usuario.idRol == 1">
     <img
